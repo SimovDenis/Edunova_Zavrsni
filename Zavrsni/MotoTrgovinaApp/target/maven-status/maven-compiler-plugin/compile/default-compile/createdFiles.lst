@@ -1,0 +1,11 @@
+zavrsni\model\Racun.class
+zavrsni\model\Kupac.class
+zavrsni\util\MotoException.class
+zavrsni\util\PocetniInsert.class
+zavrsni\controller\Obrada.class
+zavrsni\model\Djelatnik.class
+zavrsni\model\Entitet.class
+zavrsni\model\Proizvod.class
+zavrsni\util\HibernateUtil.class
+zavrsni\Start.class
+zavrsni\controller\ObradaProizvod.class
