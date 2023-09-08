@@ -1,14 +1,17 @@
 package zavrsni.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Proizvod extends Entitet {
 
     private String naziv;
     private BigDecimal cijena;
-    private Integer garancija;
+    private Integer garancija;       
 
     public String getNaziv() {
         return naziv;

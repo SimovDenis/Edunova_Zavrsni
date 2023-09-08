@@ -47,27 +47,28 @@ public class ObradaProizvod extends Obrada<Proizvod> {
         }
     }
 
-    private void kontrolaCijena() throws MotoException{
-        var c = entitet.getCijena();
-        
-        if(c == null){
+    private void kontrolaCijena() throws MotoException {
+        var c = entitet.getCijena();        
+
+        if (c == null) {
             return;
         }
-        
-        if(c.compareTo(BigDecimal.ZERO) <= 0){
+
+        if (c.compareTo(BigDecimal.ZERO) <= 0) {
             throw new MotoException("Ako je cijena postavljena, mora biti veća od 0");
         }
+
     }
 
-    private void kontrolaGarancija() throws MotoException{
+    private void kontrolaGarancija() throws MotoException {
         var g = entitet.getGarancija();
-        
-        if(g == null){
+
+        if (g == null) {
             return;
         }
-        
-        if(g < 0 || g >= 20){
-            throw new MotoException("Ako je garancija postavljena, mora veća od 0 i manja ili jednaka 20");
+
+        if (g < 0 || g >= 20) {
+            throw new MotoException("Ako je garancija postavljena, mora biti veća od 0 i manja ili jednaka 20");
         }
     }
 
