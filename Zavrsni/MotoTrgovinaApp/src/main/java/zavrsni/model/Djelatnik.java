@@ -1,6 +1,8 @@
 package zavrsni.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Djelatnik extends Entitet {
@@ -10,6 +12,17 @@ public class Djelatnik extends Entitet {
     private String brojUgovora;
     private String iban;
     private String kontakt;
+    
+    @OneToMany(mappedBy = "djelatnik")
+    private List<Racun> racuni;
+
+    public List<Racun> getRacuni() {
+        return racuni;
+    }
+
+    public void setRacuni(List<Racun> racuni) {
+        this.racuni = racuni;
+    }
 
     public Djelatnik(int sifra, String ime, String prezime, String brojUgovora, String iban, String kontakt) {
         super(sifra);

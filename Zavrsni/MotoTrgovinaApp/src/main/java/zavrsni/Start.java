@@ -22,7 +22,12 @@ public class Start {
 
     public static void main(String[] args) {
         //HibernateUtil.getSession();
-        new PocetniInsert();
+        //new PocetniInsert();
+        
+        ObradaDjelatnik od = new ObradaDjelatnik();
+        Djelatnik d = 
+         
+        
         
         
 

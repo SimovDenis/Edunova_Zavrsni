@@ -33,7 +33,9 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
     
     @Override
     protected void kontrolaBrisanje() throws MotoException {
-        
+        if(!entitet.getRacuni().isEmpty()){
+            throw new MotoException("Ne možete obrisati djelatnika koji je već na nekom računu");
+        }
     }
     
     private void kontrolaIme() throws MotoException {

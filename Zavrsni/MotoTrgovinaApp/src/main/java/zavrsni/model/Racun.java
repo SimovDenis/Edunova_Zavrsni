@@ -18,6 +18,8 @@ public class Racun extends Entitet {
     private Djelatnik djelatnik;
     @ManyToMany
     private List<Proizvod> proizvodi;
+    
+    
 
     public Date getVrijemeKupovine() {
         return vrijemeKupovine;
