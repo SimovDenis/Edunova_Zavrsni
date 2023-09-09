@@ -42,7 +42,7 @@ public class Start {
         
         ObradaRacun or = new ObradaRacun();
         Racun r = new Racun();
-        r.setBrojRacuna("");
+        r.setBrojRacuna("-22");
         or.setEntitet(r);
         
         try {
