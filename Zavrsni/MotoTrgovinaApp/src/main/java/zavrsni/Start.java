@@ -22,20 +22,11 @@ public class Start {
 
     public static void main(String[] args) {
         //HibernateUtil.getSession();
-        //new PocetniInsert();
-
-        ObradaProizvod op = new ObradaProizvod();
-        Proizvod p = new Proizvod();
-        p.setNaziv("bmw");
-        p.setCijena(new BigDecimal(2.55));
-        p.setGarancija(3);
-        op.setEntitet(p);
+        new PocetniInsert();
         
-        try {
-            op.create();
-        } catch (MotoException ex) {
-            System.out.println(ex.getPoruka());
-        }
+        
+
+       
 
     }
 }

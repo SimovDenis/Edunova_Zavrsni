@@ -92,7 +92,8 @@ public class PocetniInsert {
             r.setKupac(kupci.get(faker.number().numberBetween(0, BROJ_KUPACA - 1)));
             p = new ArrayList<>();
             for (int j = 0; j < faker.number().numberBetween(1, 100); j++) {
-                proizvodi.get(faker.number().numberBetween(0, BROJ_PROIZVODA - 1));
+                p.add(proizvodi.get(faker.number().numberBetween(0, BROJ_PROIZVODA - 1)));
+                
             }
             r.setProizvodi(p);
             session.persist(r);            

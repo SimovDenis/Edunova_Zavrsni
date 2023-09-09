@@ -34,7 +34,9 @@ public class ObradaProizvod extends Obrada<Proizvod> {
 
     @Override
     protected void kontrolaBrisanje() throws MotoException {
-
+        if(!entitet.getRacuni().isEmpty()){
+            throw new MotoException("Ne možete obrisati proizvode koji postoje već na nekom računu");
+        }
     }
 
     private void kontrolaNaziv() throws MotoException {
