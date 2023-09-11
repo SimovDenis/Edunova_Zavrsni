@@ -23,6 +23,7 @@ public class ObradaKupac extends Obrada<Kupac> {
     protected void kontrolaUnos() throws MotoException {
         kontrolaIme();
         kontrolaPrezime();
+        kontrolaKontakt();
     }
 
     @Override
@@ -39,40 +40,61 @@ public class ObradaKupac extends Obrada<Kupac> {
 
     private void kontrolaIme() throws MotoException {
         String i = entitet.getIme();
+
+        if (i == null) {
+            throw new MotoException("Ime kupca mora biti definirano");
+        }
+
+        if (i.isEmpty()) {
+            throw new MotoException("Ime kupca ne smije biti prazno");
+        }
+
         char[] iNiz = i.toCharArray();
 
         for (char c : iNiz) {
             if (Character.isDigit(c)) {
-                throw new MotoException("Ime djelatnika ne smije sadržavati brojku");
+                throw new MotoException("Ime kupca ne smije sadržavati brojku");
             }
-        }
-
-        if (i == null) {
-            throw new MotoException("Ime djelatnika mora biti definirano");
-        }
-
-        if (i.isEmpty()) {
-            throw new MotoException("Ime djelatnika ne smije biti prazno");
         }
 
     }
 
     private void kontrolaPrezime() throws MotoException {
         String p = entitet.getPrezime();
+
+        if (p == null) {
+            throw new MotoException("Prezime kupca mora biti definirano");
+        }
+
+        if (p.isEmpty()) {
+            throw new MotoException("Prezime kupca ne smije biti prazno");
+        }
+
         char[] pNiz = p.toCharArray();
 
         for (char c : pNiz) {
             if (Character.isDigit(c)) {
-                throw new MotoException("Prezime djelatnika ne smije sadržavati brojku");
+                throw new MotoException("Prezime kupca ne smije sadržavati brojku");
             }
         }
 
-        if (p == null) {
-            throw new MotoException("Prezime djelatnika mora biti definirano");
+    }
+
+    private void kontrolaKontakt() throws MotoException {
+        String s = entitet.getKontakt();
+        
+        if (s == null) {
+            throw new MotoException("Kontakt kupca mora biti definirano");
         }
 
-        if (p.isEmpty()) {
-            throw new MotoException("Prezime djelatnika ne smije biti prazno");
+        if (s.isEmpty()) {
+            throw new MotoException("Kontakt kupca ne smije biti prazno");
+        }
+        
+        char[] ch = s.toCharArray();
+
+        if (!Character.isDigit(ch[0]) && !Character.isLetter(ch[0])) {
+            throw new MotoException("Kontakt kupca mora počinjati slovom ili brojkom");
         }
 
     }

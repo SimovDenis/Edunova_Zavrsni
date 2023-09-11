@@ -40,13 +40,25 @@ public class ObradaProizvod extends Obrada<Proizvod> {
     }
 
     private void kontrolaNaziv() throws MotoException {
-        if (entitet.getNaziv() == null) {
+        String s = entitet.getNaziv();
+        
+         if (s == null) {
             throw new MotoException("Naziv mora biti definiran");
         }
 
-        if (entitet.getNaziv().isEmpty()) {
+        if (s.isEmpty()) {
             throw new MotoException("Naziv ne smije biti prazan");
         }
+        
+        char[] ch = s.toCharArray();
+                
+        if(!Character.isLetter(ch[0])){
+            throw new MotoException("Naziv proizvoda mora počinjati slovom");
+        }
+        
+       
+        
+        
     }
 
     private void kontrolaCijena() throws MotoException {
@@ -69,8 +81,8 @@ public class ObradaProizvod extends Obrada<Proizvod> {
             return;
         }
 
-        if (g < 0 || g >= 20) {
-            throw new MotoException("Ako je garancija postavljena, mora biti veća od 0 i manja ili jednaka 20");
+        if (g < 0 || g > 20) {
+            throw new MotoException("Ako je garancija postavljena, mora biti veća 0 ili veća i manja ili jednaka 20");
         }
     }
 
