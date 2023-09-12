@@ -48,10 +48,10 @@ public class Start {
         
         ObradaDjelatnik ok = new ObradaDjelatnik();
         Djelatnik k = new Djelatnik();
-        k.setIme("Denis");
-        k.setPrezime("Denić");
-        k.setKontakt("dsimov19@gmail.com");
-        k.setBrojUgovora("444.1020");
+        k.setIme("Ana7Marija");
+        k.setPrezime("Periž");
+        k.setKontakt("marija@gmail.com");
+        k.setBrojUgovora("4441-020");
         k.setIban("HR3242536");
         ok.setEntitet(k);
         

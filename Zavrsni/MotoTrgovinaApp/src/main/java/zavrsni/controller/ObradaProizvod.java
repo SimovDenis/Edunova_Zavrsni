@@ -34,35 +34,32 @@ public class ObradaProizvod extends Obrada<Proizvod> {
 
     @Override
     protected void kontrolaBrisanje() throws MotoException {
-        if(!entitet.getRacuni().isEmpty()){
+        if (!entitet.getRacuni().isEmpty()) {
             throw new MotoException("Ne možete obrisati proizvode koji postoje već na nekom računu");
         }
     }
 
     private void kontrolaNaziv() throws MotoException {
         String s = entitet.getNaziv();
-        
-         if (s == null) {
+
+        if (s == null) {
             throw new MotoException("Naziv mora biti definiran");
         }
 
         if (s.isEmpty()) {
             throw new MotoException("Naziv ne smije biti prazan");
         }
-        
+
         char[] ch = s.toCharArray();
-                
-        if(!Character.isLetter(ch[0])){
+
+        if (!Character.isLetter(ch[0])) {
             throw new MotoException("Naziv proizvoda mora počinjati slovom");
         }
-        
-       
-        
-        
+
     }
 
     private void kontrolaCijena() throws MotoException {
-        var c = entitet.getCijena();        
+        var c = entitet.getCijena();
 
         if (c == null) {
             return;
@@ -82,7 +79,7 @@ public class ObradaProizvod extends Obrada<Proizvod> {
         }
 
         if (g < 0 || g > 20) {
-            throw new MotoException("Ako je garancija postavljena, mora biti veća 0 ili veća i manja ili jednaka 20");
+            throw new MotoException("Ako je garancija postavljena, mora biti 0 ili veća. Također mora biti manja ili jednaka 20");
         }
     }
 
