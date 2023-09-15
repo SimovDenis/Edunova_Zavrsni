@@ -1,9 +1,12 @@
+zavrsni\controller\ObradaOperater.class
 zavrsni\util\PocetniInsert.class
 zavrsni\controller\Obrada.class
 zavrsni\model\Entitet.class
 zavrsni\model\Racun.class
 zavrsni\model\Kupac.class
+zavrsni\model\Operater.class
 zavrsni\util\MotoException.class
+zavrsni\util\Alati.class
 zavrsni\model\Djelatnik.class
 zavrsni\controller\ObradaDjelatnik.class
 zavrsni\model\Proizvod.class

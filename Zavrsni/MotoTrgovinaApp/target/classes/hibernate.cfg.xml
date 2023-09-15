@@ -21,6 +21,8 @@
     <mapping class = "zavrsni.model.Kupac"/>
     <mapping class = "zavrsni.model.Proizvod"/>
     <mapping class = "zavrsni.model.Racun"/>
+    <mapping class = "zavrsni.model.Operater"/>
+    
     
     
     

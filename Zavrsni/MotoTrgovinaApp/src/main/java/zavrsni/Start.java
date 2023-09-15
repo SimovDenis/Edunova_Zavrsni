@@ -3,24 +3,11 @@
  */
 package zavrsni;
 
-import java.math.BigDecimal;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import zavrsni.controller.ObradaDjelatnik;
-import zavrsni.controller.ObradaKupac;
-import zavrsni.controller.ObradaProizvod;
-import zavrsni.controller.ObradaRacun;
-import zavrsni.model.Djelatnik;
-import zavrsni.model.Kupac;
-import zavrsni.model.Proizvod;
-import zavrsni.model.Racun;
-import zavrsni.util.HibernateUtil;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
+import zavrsni.controller.ObradaOperater;
+import zavrsni.model.Operater;
 import zavrsni.util.MotoException;
-import zavrsni.util.PocetniInsert;
 
 /**
  *
@@ -31,41 +18,44 @@ public class Start {
     public static void main(String[] args) {
         //HibernateUtil.getSession();
         //new PocetniInsert();
-        
-        
+
         /**
-        ObradaDjelatnik od = new ObradaDjelatnik();
-        
-        od.setEntitet(od.read().get(0));
-        
-        
+         * ObradaDjelatnik od = new ObradaDjelatnik();
+         *
+         * od.setEntitet(od.read().get(0));
+         *
+         *
+         * try { od.delete(); } catch (Exception e) { e.printStackTrace(); }
+        *
+         */
+        ObradaOperater oo = new ObradaOperater();
+
+        Operater o = oo.autoriziraj("oper@mototrgovina.hr", "oper");
+
+        System.out.println(o == null ? "Neispravno" : o.getIme());
+
+    }
+
+    private void lozinka() {
+        Argon2 argon2 = Argon2Factory.create();
+
+        String hash = argon2.hash(10, 65536, 1, "oper".toCharArray());
+
+        ObradaOperater oo = new ObradaOperater();
+        Operater o = new Operater();
+        o.setIme("Pero");
+        o.setPrezime("Perić");
+        o.setEmail("oper@mototrgovina.hr");
+        o.setUloga("oper");
+        o.setOib("81425134722");
+        o.setLozinka(hash);
+
+        oo.setEntitet(o);
+
         try {
-            od.delete();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        **/
-        
-        ObradaDjelatnik ok = new ObradaDjelatnik();
-        Djelatnik k = new Djelatnik();
-        k.setIme("Ana7Marija");
-        k.setPrezime("Periž");
-        k.setKontakt("marija@gmail.com");
-        k.setBrojUgovora("4441-020");
-        k.setIban("HR3242536");
-        ok.setEntitet(k);
-        
-        try {
-            ok.create();
+            oo.create();
         } catch (MotoException ex) {
             System.out.println(ex.getPoruka());
         }
-         
-        
-        
-        
-
-       
-
     }
 }
