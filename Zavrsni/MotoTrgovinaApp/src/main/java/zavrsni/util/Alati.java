@@ -4,11 +4,21 @@
  */
 package zavrsni.util;
 
+import zavrsni.model.Operater;
+
 /**
  *
  * @author Denis
  */
 public class Alati {
+    
+    public static final String NAZIV_APP = "Moto Trgovina APP";
+    public static Operater OPERATER;
+    
+    public static String getOperater(){
+        return OPERATER.getIme() + " " + OPERATER.getPrezime()
+                + " (" + OPERATER.getUloga() + ")";
+    }
 
     public static boolean isValjanOIB(String oib) {
 

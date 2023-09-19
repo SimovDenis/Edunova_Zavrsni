@@ -8,6 +8,8 @@ import de.mkammerer.argon2.Argon2Factory;
 import zavrsni.controller.ObradaOperater;
 import zavrsni.model.Operater;
 import zavrsni.util.MotoException;
+import zavrsni.view.Autorizacija;
+import zavrsni.view.SplashScreen;
 
 /**
  *
@@ -26,13 +28,16 @@ public class Start {
          *
          *
          * try { od.delete(); } catch (Exception e) { e.printStackTrace(); }
-        *
+         *
          */
-        ObradaOperater oo = new ObradaOperater();
-
-        Operater o = oo.autoriziraj("oper@mototrgovina.hr", "oper");
-
-        System.out.println(o == null ? "Neispravno" : o.getIme());
+//        ObradaOperater oo = new ObradaOperater();
+//
+//        Operater o = oo.autoriziraj("oper@mototrgovina.hr", "oper");
+//
+//        System.out.println(o == null ? "Neispravno" : o.getIme());
+        //new Autorizacija().setVisible(true);
+        
+        new SplashScreen().setVisible(true);
 
     }
 
