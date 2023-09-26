@@ -2,9 +2,7 @@ package zavrsni.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,8 +10,8 @@ public class Proizvod extends Entitet {
 
     private String naziv;
     private BigDecimal cijena;
-    private Integer garancija;  
-    
+    private Integer garancija;
+
     @ManyToMany(mappedBy = "proizvodi")
     private List<Racun> racuni;
 
@@ -57,6 +55,11 @@ public class Proizvod extends Entitet {
 
     public void setGarancija(Integer garancija) {
         this.garancija = garancija;
+    }
+
+    @Override
+    public String toString() {
+        return naziv;
     }
 
 }

@@ -38,21 +38,23 @@ public class Start {
         //new Autorizacija().setVisible(true);
         
         new SplashScreen().setVisible(true);
+        
+        
 
     }
 
-    private void lozinka() {
+    private static void lozinka() {
         Argon2 argon2 = Argon2Factory.create();
 
         String hash = argon2.hash(10, 65536, 1, "oper".toCharArray());
 
         ObradaOperater oo = new ObradaOperater();
         Operater o = new Operater();
-        o.setIme("Pero");
-        o.setPrezime("Perić");
-        o.setEmail("oper@mototrgovina.hr");
-        o.setUloga("oper");
-        o.setOib("81425134722");
+        o.setIme("Denis");
+        o.setPrezime("Simov");
+        o.setEmail("dsimov@mototrgovina.hr");
+        o.setUloga("admin");
+        o.setOib("64622497133");
         o.setLozinka(hash);
 
         oo.setEntitet(o);
