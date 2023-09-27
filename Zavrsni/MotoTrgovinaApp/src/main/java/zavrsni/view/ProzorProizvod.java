@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import zavrsni.controller.ObradaProizvod;
@@ -107,6 +109,11 @@ public class ProzorProizvod extends javax.swing.JFrame {
         });
 
         btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
 
         btnObrisi.setText("Obriši");
 
@@ -212,6 +219,24 @@ public class ProzorProizvod extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDodajActionPerformed
 
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+        if(lstPodaci.getSelectedValue() == null){
+            return;
+        }
+        
+        var e = lstPodaci.getSelectedValue();
+        
+        obrada.setEntitet(e);
+        popuniModel();
+        
+        try {
+            obrada.update();
+        } catch (MotoException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+        
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
     private void popuniModel() {
         var e = obrada.getEntitet();
 
@@ -242,8 +267,8 @@ public class ProzorProizvod extends javax.swing.JFrame {
             txtCijena.setText(df.format(0));
         }
 
-        DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.of("hr", "HR"));
-        df = new DecimalFormat("#0", dfs);
+//        DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.of("hr", "HR"));
+//        df = new DecimalFormat("#0", dfs);
 
         try {
             txtGarancija.setText(df.format(e.getGarancija()));
