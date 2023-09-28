@@ -7,6 +7,7 @@ package zavrsni.view;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -192,7 +193,22 @@ public class ProzorProizvod extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
-
+        
+        String searchText = txtTrazilica.getText().toLowerCase();
+        
+        DefaultListModel<Proizvod> m = new DefaultListModel<>();
+        
+        List<Proizvod> proizvodi = obrada.read();
+        
+        for (Proizvod proizvod : proizvodi) {            
+            if (proizvod.getNaziv().toLowerCase().contains(searchText)) {
+                m.addElement(proizvod);
+            }
+        }
+        
+        lstPodaci.setModel(m);
+        lstPodaci.repaint();
+        
     }//GEN-LAST:event_btnTraziActionPerformed
 
     private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
@@ -208,7 +224,7 @@ public class ProzorProizvod extends javax.swing.JFrame {
     }//GEN-LAST:event_lstPodaciValueChanged
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-
+        
         obrada.setEntitet(new Proizvod());
         popuniModel();
 

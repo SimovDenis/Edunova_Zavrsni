@@ -97,7 +97,7 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
         }
 
         if (!br.contains("-") && !br.contains("/")) {
-            throw new MotoException("Broj ugovora djelatnika mora sadržavati -(minus) ili /(kosu crtu)");
+            throw new MotoException("Broj ugovora djelatnika mora sadržavati minus(-) ili kosu crtu(/)");
         }
 
         char[] ch = br.toCharArray();
