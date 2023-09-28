@@ -8,8 +8,6 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import zavrsni.controller.ObradaProizvod;
@@ -40,7 +38,7 @@ public class ProzorProizvod extends javax.swing.JFrame {
 
     }
 
-    private void ucitaj() {
+    private void ucitaj() {                
         DefaultListModel<Proizvod> m = new DefaultListModel<>();
         m.addAll(obrada.read());
         lstPodaci.setModel(m);
@@ -116,6 +114,11 @@ public class ProzorProizvod extends javax.swing.JFrame {
         });
 
         btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,7 +192,7 @@ public class ProzorProizvod extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
-
+        
     }//GEN-LAST:event_btnTraziActionPerformed
 
     private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
@@ -211,6 +214,7 @@ public class ProzorProizvod extends javax.swing.JFrame {
 
         try {
             obrada.create();
+            obrada.refresh();
             ucitaj();
         } catch (MotoException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
@@ -236,6 +240,29 @@ public class ProzorProizvod extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+            return;
+        }
+        
+        var e = lstPodaci.getSelectedValue();
+        
+        
+        if (JOptionPane.showConfirmDialog(getRootPane(), e.getNaziv() , "Sigurno obrisati?",
+                JOptionPane.YES_NO_OPTION)!=JOptionPane.YES_OPTION){
+            return;
+        }
+        
+        obrada.setEntitet(e);
+        
+        try {
+            obrada.delete();            
+            ucitaj();
+        } catch (MotoException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnObrisiActionPerformed
 
     private void popuniModel() {
         var e = obrada.getEntitet();

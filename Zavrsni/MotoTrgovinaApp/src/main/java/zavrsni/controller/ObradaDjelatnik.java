@@ -106,6 +106,16 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
             throw new MotoException("Broj ugovora djelatnika mora počinjati slovom ili brojkom");
         }
 
+        List<Djelatnik> lista = session.createQuery("from Djelatnik d where d.brojUgovora =:uvjet and "
+                + "d.sifra !=:sifra", Djelatnik.class)
+                .setParameter("uvjet", entitet.getBrojUgovora())
+                .setParameter("sifra", entitet.getSifra())
+                .list();
+
+        if (lista != null && !lista.isEmpty()) {
+            throw new MotoException("Broj ugovora je zauzet!");
+        }
+
     }
 
     private void kontrolaKontakt() throws MotoException {

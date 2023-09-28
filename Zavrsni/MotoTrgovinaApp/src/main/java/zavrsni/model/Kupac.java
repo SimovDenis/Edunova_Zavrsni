@@ -10,7 +10,7 @@ public class Kupac extends Entitet {
     private String ime;
     private String prezime;
     private String kontakt;
-    
+
     @OneToMany(mappedBy = "kupac")
     private List<Racun> racuni;
 
@@ -55,6 +55,11 @@ public class Kupac extends Entitet {
 
     public Kupac() {
         super();
+    }
+
+    @Override
+    public String toString() {
+        return ime + " " + prezime;
     }
 
 }

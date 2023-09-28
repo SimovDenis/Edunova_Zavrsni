@@ -12,7 +12,7 @@ public class Djelatnik extends Entitet {
     private String brojUgovora;
     private String iban;
     private String kontakt;
-    
+
     @OneToMany(mappedBy = "djelatnik")
     private List<Racun> racuni;
 
@@ -75,6 +75,11 @@ public class Djelatnik extends Entitet {
 
     public void setKontakt(String kontakt) {
         this.kontakt = kontakt;
+    }
+
+    @Override
+    public String toString() {
+        return ime + " " + prezime;
     }
 
 }

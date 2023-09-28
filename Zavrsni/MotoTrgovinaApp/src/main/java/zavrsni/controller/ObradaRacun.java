@@ -46,22 +46,20 @@ public class ObradaRacun extends Obrada<Racun> {
 
     private void kontrolaBrojRacuna() throws MotoException {
         String s = entitet.getBrojRacuna();
-        
-         if (s == null) {
+
+        if (s == null) {
             throw new MotoException("Broj računa mora biti definiran");
         }
 
         if (s.isEmpty()) {
             throw new MotoException("Broj računa ne smije biti prazno");
         }
-        
+
         char[] ch = s.toCharArray();
 
         if (!Character.isLetter(ch[0]) && !Character.isDigit(ch[0])) {
             throw new MotoException("Broj računa mora početi sa brojem ili slovom");
         }
-
-       
 
     }
 

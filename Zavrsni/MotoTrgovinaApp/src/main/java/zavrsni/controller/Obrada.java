@@ -73,5 +73,11 @@ public abstract class Obrada<T extends Entitet> {
     public void setEntitet(T entitet) {
         this.entitet = entitet;
     }
+    
+    public void refresh(){
+        if(entitet!=null){
+            session.refresh(entitet);
+        }
+    }
 
 }
