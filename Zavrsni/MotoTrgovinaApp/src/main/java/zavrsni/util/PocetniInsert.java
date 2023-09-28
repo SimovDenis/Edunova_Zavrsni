@@ -15,18 +15,18 @@ import zavrsni.model.Racun;
  * @author Denis
  */
 public class PocetniInsert {
-    
+
     private static final int BROJ_DJELATNIKA = 8;
     private static final int BROJ_KUPACA = 200;
     private static final int BROJ_PROIZVODA = 600;
     private static final int BROJ_RACUNA = 100;
-    
+
     private Faker faker;
     private Session session;
     private List<Djelatnik> djelatnici;
     private List<Kupac> kupci;
     private List<Proizvod> proizvodi;
-    
+
     public PocetniInsert() {
         faker = new Faker();
         session = HibernateUtil.getSession();
@@ -40,7 +40,7 @@ public class PocetniInsert {
         kreirajRacune();
         session.getTransaction().commit();
     }
-    
+
     private void kreirajDjelatnike() {
         Djelatnik d;
         for (int i = 0; i < BROJ_DJELATNIKA; i++) {
@@ -54,7 +54,7 @@ public class PocetniInsert {
             djelatnici.add(d);
         }
     }
-    
+
     private void kreirajKupce() {
         Kupac k;
         for (int i = 0; i < BROJ_KUPACA; i++) {
@@ -65,9 +65,9 @@ public class PocetniInsert {
             session.persist(k);
             kupci.add(k);
         }
-        
+
     }
-    
+
     private void kreirajProizvode() {
         Proizvod p;
         for (int i = 0; i < BROJ_PROIZVODA; i++) {
@@ -79,7 +79,7 @@ public class PocetniInsert {
             proizvodi.add(p);
         }
     }
-    
+
     private void kreirajRacune() {
         Racun r;
         List<Proizvod> p;
@@ -93,11 +93,11 @@ public class PocetniInsert {
             p = new ArrayList<>();
             for (int j = 0; j < faker.number().numberBetween(1, 100); j++) {
                 p.add(proizvodi.get(faker.number().numberBetween(0, BROJ_PROIZVODA - 1)));
-                
+
             }
             r.setProizvodi(p);
-            session.persist(r);            
+            session.persist(r);
         }
     }
-    
+
 }

@@ -191,14 +191,14 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements MotoViewSucel
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         obrada.setEntitet(new Djelatnik());
-        popuniModel();        
+        popuniModel();
 
         try {
             obrada.create();
             obrada.refresh();
             ucitaj();
         } catch (MotoException ex) {
-            JOptionPane.showMessageDialog(getRootPane(), ex.getMessage());            
+            JOptionPane.showMessageDialog(getRootPane(), ex.getMessage());
         }
     }//GEN-LAST:event_btnDodajActionPerformed
 

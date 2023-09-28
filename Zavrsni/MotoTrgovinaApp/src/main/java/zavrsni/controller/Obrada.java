@@ -26,8 +26,8 @@ public abstract class Obrada<T extends Entitet> {
     public Obrada() {
         session = HibernateUtil.getSession();
     }
-    
-    public Obrada(T entitet){
+
+    public Obrada(T entitet) {
         this();
         this.entitet = entitet;
     }
@@ -73,9 +73,9 @@ public abstract class Obrada<T extends Entitet> {
     public void setEntitet(T entitet) {
         this.entitet = entitet;
     }
-    
-    public void refresh(){
-        if(entitet!=null){
+
+    public void refresh() {
+        if (entitet != null) {
             session.refresh(entitet);
         }
     }

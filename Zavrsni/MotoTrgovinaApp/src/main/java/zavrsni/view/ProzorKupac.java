@@ -165,14 +165,14 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         obrada.setEntitet(new Kupac());
-        popuniModel();        
+        popuniModel();
 
         try {
             obrada.create();
             obrada.refresh();
             ucitaj();
         } catch (MotoException ex) {
-            JOptionPane.showMessageDialog(getRootPane(), ex.getMessage());            
+            JOptionPane.showMessageDialog(getRootPane(), ex.getMessage());
         }
     }//GEN-LAST:event_btnDodajActionPerformed
 
@@ -247,7 +247,7 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
         var e = obrada.getEntitet();
 
         e.setIme(txtIme.getText());
-        e.setPrezime(txtPrezime.getText());        
+        e.setPrezime(txtPrezime.getText());
         e.setKontakt(txtKontakt.getText());
     }
 
@@ -256,7 +256,7 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
         var e = obrada.getEntitet();
 
         txtIme.setText(e.getIme());
-        txtPrezime.setText(e.getPrezime());        
+        txtPrezime.setText(e.getPrezime());
         txtKontakt.setText(e.getKontakt());
     }
 }

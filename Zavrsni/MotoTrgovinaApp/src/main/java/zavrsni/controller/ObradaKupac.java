@@ -82,7 +82,7 @@ public class ObradaKupac extends Obrada<Kupac> {
 
     private void kontrolaKontakt() throws MotoException {
         String s = entitet.getKontakt();
-        
+
         if (s == null) {
             throw new MotoException("Kontakt kupca mora biti definirano");
         }
@@ -90,7 +90,7 @@ public class ObradaKupac extends Obrada<Kupac> {
         if (s.isEmpty()) {
             throw new MotoException("Kontakt kupca ne smije biti prazno");
         }
-        
+
         char[] ch = s.toCharArray();
 
         if (!Character.isDigit(ch[0]) && !Character.isLetter(ch[0])) {

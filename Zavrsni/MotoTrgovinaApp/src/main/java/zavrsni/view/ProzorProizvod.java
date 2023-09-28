@@ -38,7 +38,7 @@ public class ProzorProizvod extends javax.swing.JFrame {
 
     }
 
-    private void ucitaj() {                
+    private void ucitaj() {
         DefaultListModel<Proizvod> m = new DefaultListModel<>();
         m.addAll(obrada.read());
         lstPodaci.setModel(m);
@@ -192,7 +192,7 @@ public class ProzorProizvod extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
-        
+
     }//GEN-LAST:event_btnTraziActionPerformed
 
     private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
@@ -224,40 +224,39 @@ public class ProzorProizvod extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
-        if(lstPodaci.getSelectedValue() == null){
+        if (lstPodaci.getSelectedValue() == null) {
             return;
         }
-        
+
         var e = lstPodaci.getSelectedValue();
-        
+
         obrada.setEntitet(e);
         popuniModel();
-        
+
         try {
             obrada.update();
         } catch (MotoException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
         }
-        
+
     }//GEN-LAST:event_btnPromjeniActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-        if(lstPodaci.getSelectedValue()==null){
+        if (lstPodaci.getSelectedValue() == null) {
             return;
         }
-        
+
         var e = lstPodaci.getSelectedValue();
-        
-        
-        if (JOptionPane.showConfirmDialog(getRootPane(), e.getNaziv() , "Sigurno obrisati?",
-                JOptionPane.YES_NO_OPTION)!=JOptionPane.YES_OPTION){
+
+        if (JOptionPane.showConfirmDialog(getRootPane(), e.getNaziv(), "Sigurno obrisati?",
+                JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
-        
+
         obrada.setEntitet(e);
-        
+
         try {
-            obrada.delete();            
+            obrada.delete();
             ucitaj();
         } catch (MotoException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
@@ -296,7 +295,6 @@ public class ProzorProizvod extends javax.swing.JFrame {
 
 //        DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.of("hr", "HR"));
 //        df = new DecimalFormat("#0", dfs);
-
         try {
             txtGarancija.setText(df.format(e.getGarancija()));
         } catch (Exception ex) {

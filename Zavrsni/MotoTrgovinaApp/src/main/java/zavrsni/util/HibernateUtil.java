@@ -12,17 +12,17 @@ import org.hibernate.cfg.Configuration;
  * @author Denis
  */
 public class HibernateUtil {
-    
+
     private static Session session = null;
 
     public HibernateUtil() {
     }
-    
-    public static Session getSession(){
-        if (session == null){
+
+    public static Session getSession() {
+        if (session == null) {
             session = new Configuration().configure().buildSessionFactory().openSession();
         }
         return session;
     }
-    
+
 }

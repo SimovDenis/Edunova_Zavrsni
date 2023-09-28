@@ -9,9 +9,11 @@ package zavrsni.view;
  * @author Denis
  */
 public interface MotoViewSucelje {
-    
+
     void ucitaj();
+
     void popuniModel();
+
     void popuniView();
-    
+
 }
