@@ -7,7 +7,9 @@ import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import zavrsni.controller.ObradaOperater;
 import zavrsni.model.Operater;
+import zavrsni.util.HibernateUtil;
 import zavrsni.util.MotoException;
+import zavrsni.util.PocetniInsert;
 import zavrsni.view.Autorizacija;
 import zavrsni.view.SplashScreen;
 
@@ -19,7 +21,7 @@ public class Start {
 
     public static void main(String[] args) {
         //HibernateUtil.getSession();
-        //new PocetniInsert();
+        new PocetniInsert();
 
         /**
          * ObradaDjelatnik od = new ObradaDjelatnik();
@@ -37,7 +39,7 @@ public class Start {
 //        System.out.println(o == null ? "Neispravno" : o.getIme());
         //new Autorizacija().setVisible(true);
         
-        new SplashScreen().setVisible(true);
+        //new SplashScreen().setVisible(true);
         
         
 

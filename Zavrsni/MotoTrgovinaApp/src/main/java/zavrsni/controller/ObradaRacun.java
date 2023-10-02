@@ -38,9 +38,9 @@ public class ObradaRacun extends Obrada<Racun> {
 
     @Override
     protected void kontrolaBrisanje() throws MotoException {
-        if (entitet.getKupac() != null || entitet.getDjelatnik() != null || entitet.getProizvodi() != null) {
-            throw new MotoException("Ne možete obrisati račun koji ima kupca, djelatnika ili proizvod na sebi");
-        }
+//        if (entitet.getKupac() != null || entitet.getDjelatnik() != null || entitet.getProizvodi() != null) {
+//            throw new MotoException("Ne možete obrisati račun koji ima kupca, djelatnika ili proizvod na sebi");
+//        }
 
     }
 
@@ -76,7 +76,7 @@ public class ObradaRacun extends Obrada<Racun> {
     }
 
     private void kontrolaProizvod() throws MotoException {
-        if (entitet.getProizvodi() == null) {
+        if (entitet.getStavka() == null) {
             throw new MotoException("Račun mora imati minimalno jedan proizvod");
         }
     }

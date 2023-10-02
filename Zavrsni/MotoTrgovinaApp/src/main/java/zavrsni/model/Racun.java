@@ -1,8 +1,9 @@
 package zavrsni.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +17,19 @@ public class Racun extends Entitet {
     private Kupac kupac;
     @ManyToOne
     private Djelatnik djelatnik;
-    @ManyToMany
-    private List<Proizvod> proizvodi;
+//    @ManyToMany
+//    private List<Proizvod> proizvodi;
+    
+    @OneToMany(mappedBy = "racun")
+    private List<Stavka> stavka;
+
+    public List<Stavka> getStavka() {
+        return stavka;
+    }
+
+    public void setStavka(List<Stavka> stavka) {
+        this.stavka = stavka;
+    }           
 
     public Date getVrijemeKupovine() {
         return vrijemeKupovine;
@@ -41,15 +53,7 @@ public class Racun extends Entitet {
 
     public void setNacinPlacanja(String nacinPlacanja) {
         this.nacinPlacanja = nacinPlacanja;
-    }
-
-    public List<Proizvod> getProizvodi() {
-        return proizvodi;
-    }
-
-    public void setProizvodi(List<Proizvod> proizvodi) {
-        this.proizvodi = proizvodi;
-    }
+    }    
 
     public Kupac getKupac() {
         return kupac;

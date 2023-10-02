@@ -7,6 +7,7 @@ zavrsni\util\MotoException.class
 zavrsni\view\ProzorDjelatnik$4.class
 zavrsni\view\ProzorDjelatnik$1.class
 zavrsni\view\Izbornik$2.class
+zavrsni\model\Stavka.class
 zavrsni\Start.class
 zavrsni\controller\ObradaProizvod.class
 zavrsni\controller\ObradaOperater.class
