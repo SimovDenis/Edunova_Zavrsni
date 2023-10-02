@@ -109,7 +109,7 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
         List<Djelatnik> lista = session.createQuery("from Djelatnik d where d.brojUgovora =:uvjet and "
                 + "d.sifra !=:sifra", Djelatnik.class)
                 .setParameter("uvjet", entitet.getBrojUgovora())
-                .setParameter("sifra", entitet.getSifra())
+                .setParameter("sifra", entitet.getSifra()==null ? 0 : entitet.getSifra())
                 .list();
 
         if (lista != null && !lista.isEmpty()) {
