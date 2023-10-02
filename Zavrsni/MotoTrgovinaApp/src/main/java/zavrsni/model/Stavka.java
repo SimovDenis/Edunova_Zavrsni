@@ -6,18 +6,17 @@ package zavrsni.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 /**
  *
  * @author Denis
  */
 @Entity
-public class Stavka extends Entitet{
+public class Stavka extends Entitet {
 
     @ManyToOne
     private Racun racun;
-    @OneToOne
+    @ManyToOne
     private Proizvod proizvod;
     private Integer kolicina;
 
@@ -37,7 +36,7 @@ public class Stavka extends Entitet{
 
     public void setRacun(Racun racun) {
         this.racun = racun;
-    }    
+    }
 
     public Proizvod getProizvod() {
         return proizvod;

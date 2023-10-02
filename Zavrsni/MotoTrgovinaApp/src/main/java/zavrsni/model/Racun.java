@@ -3,7 +3,6 @@ package zavrsni.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class Racun extends Entitet {
     private Djelatnik djelatnik;
 //    @ManyToMany
 //    private List<Proizvod> proizvodi;
-    
+
     @OneToMany(mappedBy = "racun")
     private List<Stavka> stavka;
 
@@ -29,7 +28,7 @@ public class Racun extends Entitet {
 
     public void setStavka(List<Stavka> stavka) {
         this.stavka = stavka;
-    }           
+    }
 
     public Date getVrijemeKupovine() {
         return vrijemeKupovine;
@@ -53,7 +52,7 @@ public class Racun extends Entitet {
 
     public void setNacinPlacanja(String nacinPlacanja) {
         this.nacinPlacanja = nacinPlacanja;
-    }    
+    }
 
     public Kupac getKupac() {
         return kupac;
