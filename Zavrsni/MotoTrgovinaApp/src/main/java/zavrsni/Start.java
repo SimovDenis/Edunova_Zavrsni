@@ -12,12 +12,10 @@ import zavrsni.view.SplashScreen;
  */
 public class Start {
 
-    public static void main(String[] args) {
-        //HibernateUtil.getSession();
+    public static void main(String[] args) {        
         
         //new PocetniInsert();
         
-
         new SplashScreen().setVisible(true);
     }
 
