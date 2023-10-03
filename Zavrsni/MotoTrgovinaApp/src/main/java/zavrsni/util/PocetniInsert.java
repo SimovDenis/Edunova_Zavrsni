@@ -1,12 +1,16 @@
 package zavrsni.util;
 
 import com.github.javafaker.Faker;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
+import zavrsni.controller.ObradaOperater;
 import zavrsni.model.Djelatnik;
 import zavrsni.model.Kupac;
+import zavrsni.model.Operater;
 import zavrsni.model.Proizvod;
 import zavrsni.model.Racun;
 import zavrsni.model.Stavka;
@@ -21,6 +25,7 @@ public class PocetniInsert {
     private static final int BROJ_KUPACA = 200;
     private static final int BROJ_PROIZVODA = 600;
     private static final int BROJ_RACUNA = 100;
+    private static final int BROJ_STAVKI = 100;
 
     private Faker faker;
     private Session session;
@@ -28,7 +33,7 @@ public class PocetniInsert {
     private List<Kupac> kupci;
     private List<Stavka> stavke;
     private List<Proizvod> proizvodi;
-    private List<Racun> racuni;
+    private List<Racun> racuni;    
 
     public PocetniInsert() {
         faker = new Faker();
@@ -37,14 +42,15 @@ public class PocetniInsert {
         kupci = new ArrayList<>();
         proizvodi = new ArrayList<>();
         racuni = new ArrayList<>();
-        stavke = new ArrayList<>();
+        stavke = new ArrayList<>();        
         session.getTransaction().begin();
         kreirajDjelatnike();
         kreirajKupce();
         kreirajProizvode();
-        kreirajStavke();
-        kreirajRacune();        
+        kreirajRacune();
+        kreirajStavke();                           
         session.getTransaction().commit();
+        lozinka();
     }
 
     private void kreirajDjelatnike() {
@@ -76,7 +82,6 @@ public class PocetniInsert {
 
     private void kreirajRacune() {
         Racun r;
-        List<Stavka> p;
         for (int i = 0; i < BROJ_RACUNA; i++) {
             r = new Racun();
             r.setBrojRacuna(faker.business().creditCardNumber());
@@ -84,22 +89,17 @@ public class PocetniInsert {
             r.setVrijemeKupovine(faker.date().birthday(0, 3));
             r.setDjelatnik(djelatnici.get(faker.number().numberBetween(0, BROJ_DJELATNIKA - 1)));
             r.setKupac(kupci.get(faker.number().numberBetween(0, BROJ_KUPACA - 1)));
-            p = new ArrayList<>();
-            for (int j = 0; j < faker.number().numberBetween(1, 100); j++) {
-                p.add(stavke.get(faker.number().numberBetween(0, BROJ_PROIZVODA - 1)));
-
-            }
-            r.setStavka(p);
             session.persist(r);
+            racuni.add(r);
         }
     }
 
     private void kreirajStavke() {
         Stavka s;
-        for (int i = 0; i < BROJ_PROIZVODA; i++) {
+        for (int i = 0; i < BROJ_STAVKI; i++) {
             s = new Stavka();
             s.setProizvod(proizvodi.get(faker.number().numberBetween(0, BROJ_PROIZVODA - 1)));
-            //s.setRacun(racuni.get(faker.number().numberBetween(0, BROJ_RACUNA - 1)));
+            s.setRacun(racuni.get(faker.number().numberBetween(0, BROJ_RACUNA - 1)));
             s.setKolicina(faker.number().numberBetween(1, 10));
             session.persist(s);
             stavke.add(s);
@@ -115,6 +115,29 @@ public class PocetniInsert {
             p.setGarancija(faker.number().numberBetween(0, 20));
             session.persist(p);
             proizvodi.add(p);
+        }
+    }
+    
+    private void lozinka() {
+        Argon2 argon2 = Argon2Factory.create();
+
+        String hash = argon2.hash(10, 65536, 1, "oper".toCharArray());
+
+        ObradaOperater oo = new ObradaOperater();
+        Operater o = new Operater();
+        o.setIme("Denis");
+        o.setPrezime("Simov");
+        o.setEmail("dsimov@mototrgovina.hr");
+        o.setUloga("admin");
+        o.setOib("14503725279");
+        o.setLozinka(hash);
+
+        oo.setEntitet(o);
+
+        try {
+            oo.create();
+        } catch (MotoException ex) {
+            System.out.println(ex.getPoruka());
         }
     }
 
