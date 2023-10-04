@@ -79,7 +79,12 @@ public class Djelatnik extends Entitet {
 
     @Override
     public String toString() {
-        return ime + " " + prezime;
+        StringBuilder sb = new StringBuilder();
+        sb.append(getPrezime());
+        sb.append(" ");
+        sb.append(getIme());
+        
+        return sb.toString();
     }
 
 }

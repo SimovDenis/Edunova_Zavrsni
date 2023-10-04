@@ -4,7 +4,9 @@
  */
 package zavrsni.controller;
 
+import java.text.Collator;
 import java.util.List;
+import java.util.Locale;
 import zavrsni.model.Djelatnik;
 import zavrsni.util.MotoException;
 
@@ -16,7 +18,32 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
 
     @Override
     public List<Djelatnik> read() {
-        return session.createQuery("from Djelatnik", Djelatnik.class).list();
+        return session.createQuery("from Djelatnik k order by k.sifra desc", Djelatnik.class)
+                .setMaxResults(20)
+                .list();
+    }
+
+    public List<Djelatnik> read(String uvjet) {
+        uvjet = uvjet == null ? "" : uvjet;
+        uvjet = uvjet.trim();
+        uvjet = "%" + uvjet + "%";
+
+        List<Djelatnik> lista = session.createQuery("from Djelatnik k "
+                + " where concat(k.ime,' ', k.prezime,' ',k.ime,' ',coalesce(k.brojUgovora,'')) like :uvjet"
+                + " order by k.prezime, k.ime", Djelatnik.class)
+                .setParameter("uvjet", uvjet)
+                .setMaxResults(20)
+                .list();
+
+        Collator spCollator = Collator.getInstance(Locale.of("hr", "HR"));
+
+        lista.sort((e1, e2) -> spCollator.compare(e1.getPrezime(), e2.getPrezime()));
+
+        return lista;
+    }
+
+    public Djelatnik readBySifra(int sifra) {
+        return session.get(Djelatnik.class, sifra);
     }
 
     @Override
@@ -109,7 +136,7 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
         List<Djelatnik> lista = session.createQuery("from Djelatnik d where d.brojUgovora =:uvjet and "
                 + "d.sifra !=:sifra", Djelatnik.class)
                 .setParameter("uvjet", entitet.getBrojUgovora())
-                .setParameter("sifra", entitet.getSifra()==null ? 0 : entitet.getSifra())
+                .setParameter("sifra", entitet.getSifra() == null ? 0 : entitet.getSifra())
                 .list();
 
         if (lista != null && !lista.isEmpty()) {

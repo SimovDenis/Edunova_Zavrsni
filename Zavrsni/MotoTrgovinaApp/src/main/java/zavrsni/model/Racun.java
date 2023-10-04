@@ -16,8 +16,6 @@ public class Racun extends Entitet {
     private Kupac kupac;
     @ManyToOne
     private Djelatnik djelatnik;
-//    @ManyToMany
-//    private List<Proizvod> proizvodi;
 
     @OneToMany(mappedBy = "racun")
     private List<Stavka> stavka;

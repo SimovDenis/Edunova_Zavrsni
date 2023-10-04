@@ -4,7 +4,9 @@
  */
 package zavrsni.controller;
 
+import java.text.Collator;
 import java.util.List;
+import java.util.Locale;
 import zavrsni.model.Kupac;
 import zavrsni.util.MotoException;
 
@@ -16,7 +18,32 @@ public class ObradaKupac extends Obrada<Kupac> {
 
     @Override
     public List<Kupac> read() {
-        return session.createQuery("from Kupac", Kupac.class).list();
+        return session.createQuery("from Kupac k order by k.sifra desc", Kupac.class)
+                .setMaxResults(20)
+                .list();
+    }
+
+    public List<Kupac> read(String uvjet) {
+        uvjet = uvjet == null ? "" : uvjet;
+        uvjet = uvjet.trim();
+        uvjet = "%" + uvjet + "%";
+
+        List<Kupac> lista = session.createQuery("from Kupac k "
+                + " where concat(k.ime,' ', k.prezime,' ',k.ime,' ',coalesce(k.kontakt,'')) like :uvjet"
+                + " order by k.prezime, k.ime", Kupac.class)
+                .setParameter("uvjet", uvjet)
+                .setMaxResults(20)
+                .list();
+
+        Collator spCollator = Collator.getInstance(Locale.of("hr", "HR"));
+
+        lista.sort((e1, e2) -> spCollator.compare(e1.getPrezime(), e2.getPrezime()));
+
+        return lista;
+    }
+    
+    public Kupac readBySifra(int sifra) {
+        return session.get(Kupac.class, sifra);
     }
 
     @Override

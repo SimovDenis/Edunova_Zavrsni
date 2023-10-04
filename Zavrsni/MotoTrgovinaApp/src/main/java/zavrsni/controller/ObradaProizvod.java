@@ -5,7 +5,10 @@
 package zavrsni.controller;
 
 import java.math.BigDecimal;
+import java.text.Collator;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import zavrsni.model.Proizvod;
 import zavrsni.util.MotoException;
 
@@ -17,7 +20,32 @@ public class ObradaProizvod extends Obrada<Proizvod> {
 
     @Override
     public List<Proizvod> read() {
-        return session.createQuery("from Proizvod", Proizvod.class).list();
+        return session.createQuery("from Proizvod k order by k.sifra desc", Proizvod.class)
+                .setMaxResults(20)
+                .list();
+    }
+    
+    public List<Proizvod> read(String uvjet) {
+        uvjet = uvjet == null ? "" : uvjet;
+        uvjet = uvjet.trim();
+        uvjet = "%" + uvjet + "%";
+
+        List<Proizvod> lista = session.createQuery("from Proizvod k "
+                + " where k.naziv like :uvjet"
+                + " order by k.naziv", Proizvod.class)
+                .setParameter("uvjet", uvjet)
+                .setMaxResults(20)
+                .list();
+
+        Collator spCollator = Collator.getInstance(Locale.of("hr", "HR"));
+
+        lista.sort(Comparator.comparing(Proizvod::getNaziv).reversed());
+
+        return lista;
+    }
+
+    public Proizvod readBySifra(int sifra) {
+        return session.get(Proizvod.class, sifra);
     }
 
     @Override

@@ -57,7 +57,7 @@ public class ProzorProizvod extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
-        txtTrazilica = new javax.swing.JTextField();
+        txtUvjet = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnTrazi = new javax.swing.JButton();
         txtNaziv = new javax.swing.JTextField();
@@ -71,6 +71,7 @@ public class ProzorProizvod extends javax.swing.JFrame {
         btnDodaj = new javax.swing.JButton();
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
+        lblVrstaPrikaza = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -81,6 +82,12 @@ public class ProzorProizvod extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(lstPodaci);
+
+        txtUvjet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUvjetKeyPressed(evt);
+            }
+        });
 
         jLabel1.setText("Tražilica");
 
@@ -121,13 +128,17 @@ public class ProzorProizvod extends javax.swing.JFrame {
             }
         });
 
+        lblVrstaPrikaza.setText("Prikazani su 20 zadnje unesenih proizvoda");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(lblVrstaPrikaza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -149,7 +160,7 @@ public class ProzorProizvod extends javax.swing.JFrame {
                                 .addComponent(btnObrisi)))
                         .addGap(0, 24, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtTrazilica)
+                        .addComponent(txtUvjet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTrazi)))
                 .addContainerGap())
@@ -158,12 +169,14 @@ public class ProzorProizvod extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblVrstaPrikaza))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTrazilica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19)
                         .addComponent(jLabel2)
@@ -193,22 +206,12 @@ public class ProzorProizvod extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
-        
-        String searchText = txtTrazilica.getText().toLowerCase();
-        
         DefaultListModel<Proizvod> m = new DefaultListModel<>();
-        
-        List<Proizvod> proizvodi = obrada.read();
-        
-        for (Proizvod proizvod : proizvodi) {            
-            if (proizvod.getNaziv().toLowerCase().contains(searchText)) {
-                m.addElement(proizvod);
-            }
-        }
-        
+        m.addAll(obrada.read(txtUvjet.getText()));
         lstPodaci.setModel(m);
         lstPodaci.repaint();
-        
+
+        lblVrstaPrikaza.setText("Prikazani su rezultati pretraživanja");                
     }//GEN-LAST:event_btnTraziActionPerformed
 
     private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
@@ -279,6 +282,10 @@ public class ProzorProizvod extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnObrisiActionPerformed
 
+    private void txtUvjetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjetKeyPressed
+        btnTraziActionPerformed(null);
+    }//GEN-LAST:event_txtUvjetKeyPressed
+
     private void popuniModel() {
         var e = obrada.getEntitet();
 
@@ -331,11 +338,12 @@ public class ProzorProizvod extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblGarancija;
     private javax.swing.JLabel lblOperater;
+    private javax.swing.JLabel lblVrstaPrikaza;
     private javax.swing.JList<Proizvod> lstPodaci;
     private javax.swing.JToolBar toolBar;
     private javax.swing.JTextField txtCijena;
     private javax.swing.JTextField txtGarancija;
     private javax.swing.JTextField txtNaziv;
-    private javax.swing.JTextField txtTrazilica;
+    private javax.swing.JTextField txtUvjet;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,6 @@
  */
 package zavrsni.view;
 
-import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import zavrsni.controller.ObradaKupac;
@@ -53,9 +52,10 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
         btnObriši = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         lblOper = new javax.swing.JLabel();
-        txtTrazilica = new javax.swing.JTextField();
+        txtUvjet = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnTrazi = new javax.swing.JButton();
+        lblVrstaPrikaza = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,6 +96,12 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
         jToolBar1.setRollover(true);
         jToolBar1.add(lblOper);
 
+        txtUvjet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUvjetKeyPressed(evt);
+            }
+        });
+
         jLabel3.setText("Tražilica");
 
         btnTrazi.setText("Pretraži");
@@ -105,19 +111,23 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
             }
         });
 
+        lblVrstaPrikaza.setText("Prikazani su 20 zadnje unesenih kupaca");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                    .addComponent(lblVrstaPrikaza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtTrazilica)
+                            .addComponent(txtUvjet)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel1)
@@ -141,14 +151,15 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lblVrstaPrikaza))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 10, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTrazilica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
@@ -242,22 +253,18 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
 
-        String searchText = txtTrazilica.getText().toLowerCase();
-
         DefaultListModel<Kupac> m = new DefaultListModel<>();
-
-        List<Kupac> proizvodi = obrada.read();
-
-        for (Kupac kupac : proizvodi) {
-            if (kupac.getIme().toLowerCase().contains(searchText) || kupac.getPrezime().toLowerCase().contains(searchText)) {
-                m.addElement(kupac);
-            }
-        }
-
+        m.addAll(obrada.read(txtUvjet.getText()));
         lstPodaci.setModel(m);
         lstPodaci.repaint();
 
+        lblVrstaPrikaza.setText("Prikazani su rezultati pretraživanja");
+
     }//GEN-LAST:event_btnTraziActionPerformed
+
+    private void txtUvjetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjetKeyPressed
+        btnTraziActionPerformed(null);
+    }//GEN-LAST:event_txtUvjetKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -272,11 +279,12 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblOper;
+    private javax.swing.JLabel lblVrstaPrikaza;
     private javax.swing.JList<Kupac> lstPodaci;
     private javax.swing.JTextField txtIme;
     private javax.swing.JTextField txtKontakt;
     private javax.swing.JTextField txtPrezime;
-    private javax.swing.JTextField txtTrazilica;
+    private javax.swing.JTextField txtUvjet;
     // End of variables declaration//GEN-END:variables
 
     @Override

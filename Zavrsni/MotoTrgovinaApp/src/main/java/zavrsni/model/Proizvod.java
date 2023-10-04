@@ -12,8 +12,6 @@ public class Proizvod extends Entitet {
     private BigDecimal cijena;
     private Integer garancija;
 
-//    @ManyToMany(mappedBy = "proizvodi")
-//    private List<Racun> racuni;
     @OneToMany(mappedBy = "proizvod")
     private List<Stavka> stavke;
 
