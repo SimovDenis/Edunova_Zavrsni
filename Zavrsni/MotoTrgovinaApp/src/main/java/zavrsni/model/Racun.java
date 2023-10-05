@@ -68,4 +68,29 @@ public class Racun extends Entitet {
         this.djelatnik = djelatnik;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        if (getBrojRacuna() == null) {
+            sb.append("Racun bez broja racuna, ");
+            sb.append(String.valueOf(getSifra()));
+        } else if (getBrojRacuna().length() > 10) {
+            sb.append(getBrojRacuna().substring(0, 10));
+            sb.append("...");
+        } else {
+            sb.append(getBrojRacuna());
+        }
+
+        if (getKupac() != null && getKupac().getIme() != null && !getKupac().getIme().isEmpty()) {
+            sb.append(" [");
+            sb.append(getKupac().getIme());
+            sb.append(" ");
+            sb.append(getKupac().getPrezime());
+            sb.append("]");
+        }
+
+        return sb.toString();
+    }
+
 }

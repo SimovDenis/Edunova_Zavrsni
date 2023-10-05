@@ -7,6 +7,7 @@ package zavrsni.view;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import zavrsni.controller.ObradaKupac;
+import zavrsni.controller.ObradaRacun;
 import zavrsni.model.Kupac;
 import zavrsni.util.Alati;
 import zavrsni.util.MotoException;
@@ -15,17 +16,19 @@ import zavrsni.util.MotoException;
  *
  * @author Denis
  */
-public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
+public class ProzorOdabirKupca extends javax.swing.JFrame implements MotoViewSucelje {
 
     private ObradaKupac obrada;
+    private ObradaRacun obradaRacun;
 
     /**
      * Creates new form ProzorDjelatnik
      */
-    public ProzorKupac() {
+    public ProzorOdabirKupca() {
         initComponents();
         obrada = new ObradaKupac();
-        setTitle(Alati.NAZIV_APP + " | KUPCI");
+        obradaRacun = new ObradaRacun();
+        setTitle(Alati.NAZIV_APP + " | Kupci");
         lblOper.setText(Alati.getOperater());
         ucitaj();
     }
@@ -48,8 +51,7 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
         jLabel5 = new javax.swing.JLabel();
         txtKontakt = new javax.swing.JTextField();
         btnDodaj = new javax.swing.JButton();
-        btnPromjeni = new javax.swing.JButton();
-        btnObriši = new javax.swing.JButton();
+        btnOdustani = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         lblOper = new javax.swing.JLabel();
         txtUvjet = new javax.swing.JTextField();
@@ -79,17 +81,12 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
             }
         });
 
-        btnPromjeni.setText("Promjeni");
-        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+        btnOdustani.setBackground(new java.awt.Color(255, 204, 204));
+        btnOdustani.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnOdustani.setText("Odustani");
+        btnOdustani.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPromjeniActionPerformed(evt);
-            }
-        });
-
-        btnObriši.setText("Obriši");
-        btnObriši.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObrišiActionPerformed(evt);
+                btnOdustaniActionPerformed(evt);
             }
         });
 
@@ -136,16 +133,13 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
                                     .addComponent(txtKontakt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                                     .addComponent(txtPrezime, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtIme, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnDodaj)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnPromjeni)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnObriši))
+                                .addComponent(btnDodaj)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(btnTrazi)
-                        .addGap(0, 13, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnTrazi)
+                            .addComponent(btnOdustani))
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -176,8 +170,7 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDodaj)
-                            .addComponent(btnPromjeni)
-                            .addComponent(btnObriši))
+                            .addComponent(btnOdustani))
                         .addGap(18, 18, 18)
                         .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
@@ -210,46 +203,9 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
         }
     }//GEN-LAST:event_btnDodajActionPerformed
 
-    private void btnObrišiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrišiActionPerformed
-        if (lstPodaci.getSelectedValue() == null) {
-            return;
-        }
-
-        var e = lstPodaci.getSelectedValue();
-
-        if (JOptionPane.showConfirmDialog(getRootPane(), e, "Sigurno obrisati?",
-                JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
-            return;
-        }
-
-        obrada.setEntitet(e);
-
-        try {
-            obrada.delete();
-            ucitaj();
-        } catch (MotoException ex) {
-            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
-        }
-    }//GEN-LAST:event_btnObrišiActionPerformed
-
-    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
-        if (lstPodaci.getSelectedValue() == null) {
-            return;
-        }
-
-        var e = lstPodaci.getSelectedValue();
-
-        obrada.setEntitet(e);
-        popuniModel();
-
-        try {
-            obrada.update();
-            ucitaj();
-        } catch (MotoException ex) {
-            JOptionPane.showMessageDialog(getRootPane(), ex.getMessage());
-            obrada.refresh();
-        }
-    }//GEN-LAST:event_btnPromjeniActionPerformed
+    private void btnOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdustaniActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnOdustaniActionPerformed
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
 
@@ -269,8 +225,7 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
-    private javax.swing.JButton btnObriši;
-    private javax.swing.JButton btnPromjeni;
+    private javax.swing.JButton btnOdustani;
     private javax.swing.JButton btnTrazi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
