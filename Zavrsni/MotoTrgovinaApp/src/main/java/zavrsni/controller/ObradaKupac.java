@@ -18,9 +18,7 @@ public class ObradaKupac extends Obrada<Kupac> {
 
     @Override
     public List<Kupac> read() {
-        return session.createQuery("from Kupac k order by k.sifra desc", Kupac.class)
-                .setMaxResults(20)
-                .list();
+        return session.createQuery("from Kupac k order by k.sifra desc", Kupac.class).list();
     }
 
     public List<Kupac> read(String uvjet) {

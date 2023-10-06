@@ -111,8 +111,6 @@ public class ProzorKupac extends javax.swing.JFrame implements MotoViewSucelje {
             }
         });
 
-        lblVrstaPrikaza.setText("Prikazani su 20 zadnje unesenih kupaca");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
