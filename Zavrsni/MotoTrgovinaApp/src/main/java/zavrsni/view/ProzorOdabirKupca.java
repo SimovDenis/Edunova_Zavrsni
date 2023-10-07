@@ -5,12 +5,10 @@
 package zavrsni.view;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 import zavrsni.controller.ObradaKupac;
 import zavrsni.controller.ObradaRacun;
 import zavrsni.model.Kupac;
 import zavrsni.util.Alati;
-import zavrsni.util.MotoException;
 
 /**
  *
@@ -19,7 +17,6 @@ import zavrsni.util.MotoException;
 public class ProzorOdabirKupca extends javax.swing.JFrame implements MotoViewSucelje {
 
     private ObradaKupac obrada;
-    private ObradaRacun obradaRacun;
 
     /**
      * Creates new form ProzorDjelatnik
@@ -27,7 +24,6 @@ public class ProzorOdabirKupca extends javax.swing.JFrame implements MotoViewSuc
     public ProzorOdabirKupca() {
         initComponents();
         obrada = new ObradaKupac();
-        obradaRacun = new ObradaRacun();
         setTitle(Alati.NAZIV_APP + " | Kupci");
         lblOper.setText(Alati.getOperater());
         ucitaj();
@@ -168,9 +164,9 @@ public class ProzorOdabirKupca extends javax.swing.JFrame implements MotoViewSuc
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtKontakt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDodaj)
-                            .addComponent(btnOdustani))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnOdustani, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnDodaj))
                         .addGap(18, 18, 18)
                         .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
@@ -191,18 +187,17 @@ public class ProzorOdabirKupca extends javax.swing.JFrame implements MotoViewSuc
     }//GEN-LAST:event_lstPodaciValueChanged
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        obrada.setEntitet(new Kupac());
-        popuniModel();
-
-        try {
-            obrada.create();
-            obrada.refresh();
-            ucitaj();
-        } catch (MotoException ex) {
-            JOptionPane.showMessageDialog(getRootPane(), ex.getMessage());
-        }
+        if (lstPodaci.getSelectedValue() == null) {
+            return;
+        }        
+        
+        dispose();
     }//GEN-LAST:event_btnDodajActionPerformed
 
+    protected Kupac getKupac(){
+        return lstPodaci.getSelectedValue();
+    }
+    
     private void btnOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdustaniActionPerformed
         dispose();
     }//GEN-LAST:event_btnOdustaniActionPerformed

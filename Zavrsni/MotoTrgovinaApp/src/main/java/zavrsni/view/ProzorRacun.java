@@ -34,7 +34,7 @@ import zavrsni.util.MotoException;
 public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
     
     private ObradaRacun obrada;
-    private ObradaKupac obradaKupac;
+    private ProzorOdabirKupca prozor;
 
     /**
      * Creates new form ProzorRacun
@@ -42,7 +42,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
     public ProzorRacun() {
         initComponents();
         obrada = new ObradaRacun();
-        obradaKupac = new ObradaKupac();
+        prozor = new ProzorOdabirKupca();
         setTitle(Alati.NAZIV_APP + " | RACUNI");
         lblOper.setText(Alati.getOperater());
         ucitajKupca();
@@ -64,7 +64,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         
         cmbKupac.setModel(m);
         cmbKupac.repaint();
-    }
+    }        
     
     private void definirajVrijemeKupovine() {
         DatePickerSettings dps = new DatePickerSettings(Locale.of("hr", "HR"));
@@ -380,6 +380,8 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
     @Override
     public void popuniView() {
         var e = obrada.getEntitet();
+        var k = prozor.getKupac();
+        
         
         txtBrojRacuna.setText(e.getBrojRacuna());
         
@@ -387,6 +389,10 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
             cmbKupac.setSelectedIndex(0);
         } else {
             cmbKupac.setSelectedItem(e.getKupac());
+        }
+        
+        if(k != null){
+            cmbKupac.setSelectedItem(k);
         }
         
         if (e.getDjelatnik() == null) {
