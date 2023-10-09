@@ -32,7 +32,7 @@ import zavrsni.util.MotoException;
  * @author Denis
  */
 public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
-    
+
     private ObradaRacun obrada;
     private ProzorOdabirKupca prozor;
 
@@ -50,56 +50,56 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         definirajVrijemeKupovine();
         ucitaj();
     }
-    
+
     private void ucitajKupca() {
         DefaultComboBoxModel<Kupac> m = new DefaultComboBoxModel<>();
-        
+
         Kupac d = new Kupac();
         d.setSifra(0);
         d.setIme("Odaberite ");
         d.setPrezime("kupca");
         m.addElement(d);
-        
+
         m.addAll(new ObradaKupac().read());
-        
+
         cmbKupac.setModel(m);
         cmbKupac.repaint();
-    }        
-    
+    }
+
     private void definirajVrijemeKupovine() {
         DatePickerSettings dps = new DatePickerSettings(Locale.of("hr", "HR"));
         dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
         dps.setTranslationClear("Očisti");
         dps.setTranslationToday("Danas");
         dtpVrijemeKupovine.datePicker.setSettings(dps);
-        
+
         TimePickerSettings tps = dtpVrijemeKupovine.timePicker.getSettings();
-        
+
         tps.setFormatForDisplayTime("HH:mm");
         tps.use24HourClockFormat();
-        
+
         ArrayList<LocalTime> lista = new ArrayList<>();
         for (int i = 0; i < 24; i++) {
             for (int j = 0; j < 60; j += 10) {
                 lista.add(LocalTime.of(i, j));
             }
         }
-        
+
         tps.generatePotentialMenuTimes(lista);
-        
+
     }
-    
+
     private void ucitajDjelatnika() {
         DefaultComboBoxModel<Djelatnik> m = new DefaultComboBoxModel<>();
-        
+
         Djelatnik d = new Djelatnik();
         d.setSifra(0);
         d.setIme("djelatnika");
         d.setPrezime("Odaberite ");
         m.addElement(d);
-        
+
         m.addAll(new ObradaDjelatnik().read());
-        
+
         cmbDjelatnik.setModel(m);
         cmbDjelatnik.repaint();
     }
@@ -265,7 +265,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         if (evt.getValueIsAdjusting() || lstPodaci.getSelectedValue() == null) {
             return;
         }
-        
+
         obrada.setEntitet(lstPodaci.getSelectedValue());
         popuniView();
     }//GEN-LAST:event_lstPodaciValueChanged
@@ -273,7 +273,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         obrada.setEntitet(new Racun());
         popuniModel();
-        
+
         try {
             obrada.create();
             obrada.refresh();
@@ -287,16 +287,16 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         if (lstPodaci.getSelectedValue() == null) {
             return;
         }
-        
+
         var e = lstPodaci.getSelectedValue();
-        
+
         if (JOptionPane.showConfirmDialog(getRootPane(), e, "Sigurno obrisati?",
                 JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
-        
+
         obrada.setEntitet(e);
-        
+
         try {
             obrada.delete();
             ucitaj();
@@ -309,12 +309,12 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         if (lstPodaci.getSelectedValue() == null) {
             return;
         }
-        
+
         var e = lstPodaci.getSelectedValue();
-        
+
         obrada.setEntitet(e);
         popuniModel();
-        
+
         try {
             obrada.update();
             ucitaj();
@@ -357,62 +357,61 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         lstPodaci.setModel(m);
         lstPodaci.repaint();
     }
-    
+
     @Override
     public void popuniModel() {
         var e = obrada.getEntitet();
-        
+
         e.setBrojRacuna(txtBrojRacuna.getText());
         e.setKupac((Kupac) cmbKupac.getSelectedItem());
         e.setDjelatnik((Djelatnik) cmbDjelatnik.getSelectedItem());
-        
+
         LocalDate ld = dtpVrijemeKupovine.datePicker.getDate();
         LocalTime lt = dtpVrijemeKupovine.timePicker.getTime();
-        
+
         LocalDateTime ldt = LocalDateTime.of(ld, lt);
-        
+
         e.setVrijemeKupovine(Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant()));
-        
+
         e.setNacinPlacanja(txtNacinPlacanja.getText());
-        
+
     }
-    
+
     @Override
     public void popuniView() {
         var e = obrada.getEntitet();
-        var k = prozor.getKupac();
-        
-        
+        Kupac k = prozor.getKupac();
+
         txtBrojRacuna.setText(e.getBrojRacuna());
-        
+
         if (e.getKupac() == null) {
             cmbKupac.setSelectedIndex(0);
         } else {
             cmbKupac.setSelectedItem(e.getKupac());
         }
-        
-        if(k != null){
+
+        if (k != null) {
             cmbKupac.setSelectedItem(k);
         }
-        
+
         if (e.getDjelatnik() == null) {
             cmbDjelatnik.setSelectedIndex(0);
         } else {
             cmbDjelatnik.setSelectedItem(e.getDjelatnik());
         }
-        
+
         if (e.getVrijemeKupovine() == null) {
             dtpVrijemeKupovine.datePicker.setDate(null);
             dtpVrijemeKupovine.timePicker.setTime(null);
         } else {
             LocalDate ld = e.getVrijemeKupovine().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             dtpVrijemeKupovine.datePicker.setDate(ld);
-            
+
             LocalTime lt = e.getVrijemeKupovine().toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
             dtpVrijemeKupovine.timePicker.setTime(lt);
         }
-        
+
         txtNacinPlacanja.setText(e.getNacinPlacanja());
-        
+
     }
 }
