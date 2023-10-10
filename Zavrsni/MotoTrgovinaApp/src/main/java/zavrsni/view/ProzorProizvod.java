@@ -7,7 +7,6 @@ package zavrsni.view;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;

@@ -26,6 +26,10 @@ public class ObradaProizvod extends Obrada<Proizvod> {
     }
     
     public List<Proizvod> read(String uvjet) {
+        return read(uvjet, 20);
+    }
+    
+    public List<Proizvod> read(String uvjet, int brojRezultata) {
         uvjet = uvjet == null ? "" : uvjet;
         uvjet = uvjet.trim();
         uvjet = "%" + uvjet + "%";
@@ -34,7 +38,7 @@ public class ObradaProizvod extends Obrada<Proizvod> {
                 + " where k.naziv like :uvjet"
                 + " order by k.naziv", Proizvod.class)
                 .setParameter("uvjet", uvjet)
-                .setMaxResults(20)
+                .setMaxResults(brojRezultata)
                 .list();
 
         Collator spCollator = Collator.getInstance(Locale.of("hr", "HR"));

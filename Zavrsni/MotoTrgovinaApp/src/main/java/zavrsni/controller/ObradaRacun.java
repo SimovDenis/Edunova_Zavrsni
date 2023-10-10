@@ -4,12 +4,9 @@
  */
 package zavrsni.controller;
 
-import java.text.Collator;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import zavrsni.model.Proizvod;
 import zavrsni.model.Racun;
 import zavrsni.util.MotoException;
 

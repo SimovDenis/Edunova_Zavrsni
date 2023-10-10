@@ -50,6 +50,7 @@ zavrsni\view\ProzorDjelatnik$6.class
 zavrsni\view\ProzorProizvod$4.class
 zavrsni\view\ProzorRacun$2.class
 zavrsni\view\ProzorProizvod.class
+zavrsni\controller\ObradaStavka.class
 zavrsni\view\ProzorKupac$2.class
 zavrsni\model\Racun.class
 zavrsni\view\Autorizacija$3.class

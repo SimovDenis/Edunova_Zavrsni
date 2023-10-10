@@ -25,7 +25,7 @@ public class PocetniInsert {
     private static final int BROJ_KUPACA = 200;
     private static final int BROJ_PROIZVODA = 600;
     private static final int BROJ_RACUNA = 100;
-    private static final int BROJ_STAVKI = 100;
+    private static final int BROJ_STAVKI = 2000;
 
     private Faker faker;
     private Session session;

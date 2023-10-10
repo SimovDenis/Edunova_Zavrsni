@@ -54,4 +54,9 @@ public class Stavka extends Entitet {
         this.kolicina = kolicina;
     }
 
+    @Override
+    public String toString() {
+        return proizvod.getNaziv() + "(" + kolicina + ")";
+    }
+
 }
