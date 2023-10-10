@@ -4,11 +4,13 @@
  */
 package zavrsni.view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import zavrsni.controller.ObradaKupac;
-import zavrsni.controller.ObradaRacun;
 import zavrsni.model.Kupac;
 import zavrsni.util.Alati;
+import zavrsni.util.MotoException;
 
 /**
  *
@@ -17,12 +19,14 @@ import zavrsni.util.Alati;
 public class ProzorOdabirKupca extends javax.swing.JFrame implements MotoViewSucelje {
 
     private ObradaKupac obrada;
+    private ProzorRacun prozorRacun;
 
     /**
      * Creates new form ProzorDjelatnik
      */
-    public ProzorOdabirKupca() {
+    public ProzorOdabirKupca(ProzorRacun prozorRacun) {
         initComponents();
+        this.prozorRacun = prozorRacun;
         obrada = new ObradaKupac();
         setTitle(Alati.NAZIV_APP + " | Kupci");
         lblOper.setText(Alati.getOperater());
@@ -189,15 +193,24 @@ public class ProzorOdabirKupca extends javax.swing.JFrame implements MotoViewSuc
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         if (lstPodaci.getSelectedValue() == null) {
             return;
-        }        
-        
+        }
+
+        var k = lstPodaci.getSelectedValue();
+
+        prozorRacun.getObradaRacun().getEntitet().setKupac(k);
+
+        try {
+            prozorRacun.getObradaRacun().update();
+        } catch (MotoException ex) {
+
+        }
+
+        prozorRacun.popuniView();
+
         dispose();
+
     }//GEN-LAST:event_btnDodajActionPerformed
 
-    protected Kupac getKupac(){
-        return lstPodaci.getSelectedValue();
-    }
-    
     private void btnOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdustaniActionPerformed
         dispose();
     }//GEN-LAST:event_btnOdustaniActionPerformed

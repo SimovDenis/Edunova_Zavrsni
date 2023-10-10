@@ -8,6 +8,7 @@ zavrsni\model\Kupac.class
 zavrsni\util\MotoException.class
 zavrsni\view\ProzorDjelatnik$4.class
 zavrsni\view\ProzorProizvod$6.class
+zavrsni\view\ProzorRacun$6.class
 zavrsni\view\ProzorDjelatnik$1.class
 zavrsni\view\Izbornik$2.class
 zavrsni\model\Stavka.class
@@ -29,8 +30,10 @@ zavrsni\view\Izbornik.class
 zavrsni\view\ProzorKupac.class
 zavrsni\view\ProzorOdabirKupca.class
 zavrsni\view\ProzorProizvod$5.class
+zavrsni\view\ProzorRacun$7.class
 zavrsni\view\ProzorKupac$4.class
 zavrsni\util\PocetniInsert.class
+zavrsni\view\ProzorRacun$8.class
 zavrsni\view\ProzorRacun.class
 zavrsni\controller\Obrada.class
 zavrsni\view\ProzorDjelatnik$3.class

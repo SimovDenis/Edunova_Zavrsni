@@ -4,8 +4,12 @@
  */
 package zavrsni.controller;
 
+import java.text.Collator;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import zavrsni.model.Proizvod;
 import zavrsni.model.Racun;
 import zavrsni.util.MotoException;
 
@@ -18,6 +22,22 @@ public class ObradaRacun extends Obrada<Racun> {
     @Override
     public List<Racun> read() {
         return session.createQuery("from Racun", Racun.class).list();
+    }
+    
+    public List<Racun> read(String uvjet) {
+        uvjet = uvjet == null ? "" : uvjet;
+        uvjet = uvjet.trim();
+        uvjet = "%" + uvjet + "%";
+
+        List<Racun> lista = session.createQuery("from Racun k "
+                + " where k.brojRacuna like :uvjet"
+                + " order by k.brojRacuna", Racun.class)
+                .setParameter("uvjet", uvjet)                
+                .list();        
+
+        lista.sort(Comparator.comparing(Racun::getBrojRacuna).reversed());
+
+        return lista;
     }
 
     @Override
