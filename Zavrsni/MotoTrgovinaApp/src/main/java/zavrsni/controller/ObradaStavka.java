@@ -4,11 +4,7 @@
  */
 package zavrsni.controller;
 
-import java.text.Collator;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
-import zavrsni.model.Proizvod;
 import zavrsni.model.Stavka;
 import zavrsni.util.MotoException;
 
@@ -25,17 +21,28 @@ public class ObradaStavka extends Obrada<Stavka>{
 
     @Override
     protected void kontrolaUnos() throws MotoException {
-        
+        kontrolaKolicina();
     }
 
     @Override
     protected void kontrolaPromjena() throws MotoException {
-        
+        kontrolaUnos();
     }
 
     @Override
-    protected void kontrolaBrisanje() throws MotoException {
+    protected void kontrolaBrisanje() throws MotoException {                
+    }
+
+    private void kontrolaKolicina() throws MotoException {
+        var g = entitet.getKolicina();
+                
+        if (g == null) {
+            throw new MotoException("Količina mora biti definirana");
+        }
         
+        if (g < 1 || g > 10) {
+            throw new MotoException("Ako je količina postavljena, mora biti 0 ili veća. Također mora biti manja ili jednaka 10");
+        }
     }
     
 }

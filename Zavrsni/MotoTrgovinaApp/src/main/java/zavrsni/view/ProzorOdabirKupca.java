@@ -4,8 +4,6 @@
  */
 package zavrsni.view;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import zavrsni.controller.ObradaKupac;
 import zavrsni.model.Kupac;

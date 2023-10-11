@@ -20,8 +20,7 @@ public class ObradaProizvod extends Obrada<Proizvod> {
 
     @Override
     public List<Proizvod> read() {
-        return session.createQuery("from Proizvod k order by k.sifra desc", Proizvod.class)
-                .setMaxResults(20)
+        return session.createQuery("from Proizvod k order by k.sifra desc", Proizvod.class)                
                 .list();
     }
     

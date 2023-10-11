@@ -1,3 +1,4 @@
+zavrsni\view\ProzorOdabirStavke$4.class
 zavrsni\view\SplashScreen.class
 zavrsni\view\ProzorRacun$3.class
 zavrsni\view\ProzorKupac$3.class
@@ -7,6 +8,7 @@ zavrsni\view\ProzorOdabirKupca$3.class
 zavrsni\model\Kupac.class
 zavrsni\util\MotoException.class
 zavrsni\view\ProzorDjelatnik$4.class
+zavrsni\view\ProzorOdabirStavke.class
 zavrsni\view\ProzorProizvod$6.class
 zavrsni\view\ProzorRacun$6.class
 zavrsni\view\ProzorDjelatnik$1.class
@@ -15,8 +17,10 @@ zavrsni\model\Stavka.class
 zavrsni\Start.class
 zavrsni\controller\ObradaProizvod.class
 zavrsni\controller\ObradaOperater.class
+zavrsni\view\ProzorOdabirStavke$5.class
 zavrsni\view\ProzorDjelatnik$2.class
 zavrsni\view\Izbornik$5.class
+zavrsni\view\ProzorOdabirStavke$3.class
 zavrsni\view\ProzorRacun$4.class
 zavrsni\view\ProzorProizvod$2.class
 zavrsni\view\Autorizacija$1.class
@@ -41,6 +45,7 @@ zavrsni\view\ProzorKupac$1.class
 zavrsni\view\ProzorOdabirKupca$1.class
 zavrsni\view\ProzorRacun$1.class
 zavrsni\view\ProzorRacun$5.class
+zavrsni\view\ProzorOdabirStavke$2.class
 zavrsni\view\Izbornik$4.class
 zavrsni\view\ProzorProizvod$1.class
 zavrsni\view\ProzorKupac$5.class
@@ -48,6 +53,7 @@ zavrsni\util\HibernateUtil.class
 zavrsni\view\Autorizacija$2.class
 zavrsni\view\ProzorDjelatnik$6.class
 zavrsni\view\ProzorProizvod$4.class
+zavrsni\view\ProzorRacun$9.class
 zavrsni\view\ProzorRacun$2.class
 zavrsni\view\ProzorProizvod.class
 zavrsni\controller\ObradaStavka.class
@@ -55,6 +61,7 @@ zavrsni\view\ProzorKupac$2.class
 zavrsni\model\Racun.class
 zavrsni\view\Autorizacija$3.class
 zavrsni\view\ProzorKupac$6.class
+zavrsni\view\ProzorOdabirStavke$1.class
 zavrsni\model\Operater.class
 zavrsni\util\Alati.class
 zavrsni\view\Izbornik$3.class

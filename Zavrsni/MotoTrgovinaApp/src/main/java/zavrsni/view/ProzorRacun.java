@@ -4,8 +4,6 @@
  */
 package zavrsni.view;
 
-// KUPAC NE RADI NAJBOLJE U VIEW JER POKAZUJE ZADNJIH 20 KUPACA
-// TREBA NAPRAVIT PRETRAŽIVANJE KUPCA (DODAVANJE KUPCA)
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.components.TimePickerSettings;
 import java.time.LocalDate;
@@ -16,19 +14,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import zavrsni.controller.ObradaDjelatnik;
 import zavrsni.controller.ObradaKupac;
-import zavrsni.controller.ObradaProizvod;
 import zavrsni.controller.ObradaRacun;
 import zavrsni.controller.ObradaStavka;
 import zavrsni.model.Djelatnik;
 import zavrsni.model.Kupac;
-import zavrsni.model.Proizvod;
 import zavrsni.model.Racun;
 import zavrsni.model.Stavka;
 import zavrsni.util.Alati;
@@ -150,7 +145,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         lblRacuni = new javax.swing.JLabel();
         txtBrojRacuna = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnObrišiStavku = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -221,15 +216,20 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         });
 
         btnUpravljajProizvodima.setText("Dodaj na račun");
+        btnUpravljajProizvodima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpravljajProizvodimaActionPerformed(evt);
+            }
+        });
 
         lblRacuni.setText("Prikazani su svi računi");
 
         jLabel7.setText("Pretraga računa po broju računa");
 
-        jButton1.setText("Obriši s računa");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnObrišiStavku.setText("Obriši s računa");
+        btnObrišiStavku.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnObrišiStavkuActionPerformed(evt);
             }
         });
 
@@ -274,7 +274,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
                                 .addGap(0, 40, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnUpravljajProizvodima, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(btnObrišiStavku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,7 +325,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbDjelatnik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
+                            .addComponent(btnObrišiStavku))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -413,6 +413,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
 
     private void btnPretraziKupcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziKupcaActionPerformed
         if (lstPodaci.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(getRootPane(), "Obavezno odabrati račun te ga preurediti po želji");
             return;
         }
 
@@ -432,7 +433,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         btnTraziActionPerformed(null);
     }//GEN-LAST:event_txtUvjetKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnObrišiStavkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrišiStavkuActionPerformed
         if (lstProizvodiNaRacunu.getSelectedValue() == null) {
             return;
         }
@@ -457,12 +458,22 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
 
         btnTraziActionPerformed(null);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnObrišiStavkuActionPerformed
+
+    private void btnUpravljajProizvodimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpravljajProizvodimaActionPerformed
+        if (lstPodaci.getSelectedValue() == null) {
+            return;
+        }
+
+        new ProzorOdabirStavke(this).setVisible(true);
+
+    }//GEN-LAST:event_btnUpravljajProizvodimaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnObriši;
+    private javax.swing.JButton btnObrišiStavku;
     private javax.swing.JButton btnPretraziKupca;
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JButton btnTrazi;
@@ -470,7 +481,6 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
     private javax.swing.JComboBox<Djelatnik> cmbDjelatnik;
     private javax.swing.JComboBox<Kupac> cmbKupac;
     private com.github.lgooddatepicker.components.DateTimePicker dtpVrijemeKupovine;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
