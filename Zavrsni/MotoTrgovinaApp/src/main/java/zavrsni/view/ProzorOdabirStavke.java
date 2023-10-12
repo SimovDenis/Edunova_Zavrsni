@@ -22,7 +22,7 @@ import zavrsni.util.MotoException;
  * @author Denis
  */
 public class ProzorOdabirStavke extends javax.swing.JFrame implements MotoViewSucelje {
-    
+
     private ObradaStavka obrada;
     private ProzorRacun prozorRacun;
     private ObradaProizvod obradaProizvod;
@@ -35,11 +35,9 @@ public class ProzorOdabirStavke extends javax.swing.JFrame implements MotoViewSu
         this.prozorRacun = prozorRacun;
         obrada = new ObradaStavka();
         obradaProizvod = new ObradaProizvod();
-        setTitle(Alati.NAZIV_APP + " | Proizvodi");        
+        setTitle(Alati.NAZIV_APP + " | Proizvodi");
         ucitaj();
     }
-    
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -195,27 +193,19 @@ public class ProzorOdabirStavke extends javax.swing.JFrame implements MotoViewSu
 
         obrada.setEntitet(new Stavka());
         popuniModel();
-        
+
         try {
             obrada.create();
             obrada.refresh();
-        } catch (MotoException ex) {            
+        } catch (MotoException ex) {
         }
-                        
-        
-        try {
-            prozorRacun.getObradaRacun().update();
-            prozorRacun.getObradaRacun().refresh();
-            prozorRacun.ucitaj();
-        } catch (MotoException ex) {            
-        }
-        
+
+        prozorRacun.getObradaRacun().refresh();
         prozorRacun.popuniView();
-                
-        dispose();                
+
+        dispose();
     }//GEN-LAST:event_btnDodajActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
@@ -241,18 +231,18 @@ public class ProzorOdabirStavke extends javax.swing.JFrame implements MotoViewSu
     @Override
     public void popuniModel() {
         var s = obrada.getEntitet();
-        
-        s.setRacun(s.getRacun());
+
+        s.setRacun(prozorRacun.getObradaRacun().getEntitet());
         s.setProizvod(lstPodaci.getSelectedValue());
         try {
             s.setKolicina(Integer.valueOf(txtKolicina.getText()));
         } catch (NumberFormatException ex) {
             s.setKolicina(0);
         }
-        
+
     }
 
     @Override
-    public void popuniView() {          
+    public void popuniView() {
     }
 }
