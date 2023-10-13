@@ -63,7 +63,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="40" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="btnUpravljajProizvodima" max="32767" attributes="0"/>
+                                  <Component id="btnDodajStavku" max="32767" attributes="0"/>
                                   <Component id="btnObrišiStavku" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -81,9 +81,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane2" alignment="0" pref="237" max="32767" attributes="0"/>
-                  <Component id="lblProizvodiNaRacunu" alignment="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jScrollPane2" alignment="0" pref="237" max="32767" attributes="0"/>
+                      <Component id="lblProizvodiNaRacunu" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="lblUkupanIznos" min="-2" pref="221" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -122,7 +125,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cmbKupac" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnUpravljajProizvodima" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="btnDodajStavku" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnPretraziKupca" min="-2" max="-2" attributes="0"/>
@@ -150,7 +153,10 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jToolBar1" min="-2" pref="25" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jToolBar1" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="lblUkupanIznos" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -309,12 +315,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTraziActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnUpravljajProizvodima">
+    <Component class="javax.swing.JButton" name="btnDodajStavku">
       <Properties>
         <Property name="text" type="java.lang.String" value="Dodaj na ra&#x10d;un"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpravljajProizvodimaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDodajStavkuActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblRacuni">
@@ -336,6 +342,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObri&#x161;iStavkuActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblUkupanIznos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ukupan iznos:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

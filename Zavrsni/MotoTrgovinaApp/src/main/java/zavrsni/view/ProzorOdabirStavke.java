@@ -4,12 +4,7 @@
  */
 package zavrsni.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 import zavrsni.controller.ObradaProizvod;
 import zavrsni.controller.ObradaStavka;
 import zavrsni.model.Proizvod;
@@ -197,7 +192,7 @@ public class ProzorOdabirStavke extends javax.swing.JFrame implements MotoViewSu
         try {
             obrada.create();
             obrada.refresh();
-        } catch (MotoException ex) {
+        } catch (MotoException ex) {            
         }
 
         prozorRacun.getObradaRacun().refresh();
