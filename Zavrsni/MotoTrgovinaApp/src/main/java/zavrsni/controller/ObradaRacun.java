@@ -20,7 +20,7 @@ public class ObradaRacun extends Obrada<Racun> {
     public List<Racun> read() {
         return session.createQuery("from Racun", Racun.class).list();
     }
-    
+
     public List<Racun> read(String uvjet) {
         uvjet = uvjet == null ? "" : uvjet;
         uvjet = uvjet.trim();
@@ -29,8 +29,8 @@ public class ObradaRacun extends Obrada<Racun> {
         List<Racun> lista = session.createQuery("from Racun k "
                 + " where k.brojRacuna like :uvjet"
                 + " order by k.brojRacuna", Racun.class)
-                .setParameter("uvjet", uvjet)                
-                .list();        
+                .setParameter("uvjet", uvjet)
+                .list();
 
         lista.sort(Comparator.comparing(Racun::getBrojRacuna).reversed());
 
@@ -44,9 +44,9 @@ public class ObradaRacun extends Obrada<Racun> {
         kontrolaDjelatnik();
         kontrolaVrijemeKupovineUnos();
     }
-    
-    private void kontrolaKupac(){
-        if (getEntitet().getKupac()== null || getEntitet().getKupac().getSifra().equals(0)) {
+
+    private void kontrolaKupac() {
+        if (getEntitet().getKupac() == null || getEntitet().getKupac().getSifra().equals(0)) {
             getEntitet().setKupac(null);
         }
     }
@@ -71,7 +71,7 @@ public class ObradaRacun extends Obrada<Racun> {
     protected void kontrolaPromjena() throws MotoException {
         kontrolaBrojRacuna();
         kontrolaKupac();
-        kontrolaDjelatnik();        
+        kontrolaDjelatnik();
         kontrolaVrijemeKupovinePromjena();
     }
 

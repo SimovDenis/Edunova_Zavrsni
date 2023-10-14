@@ -62,25 +62,23 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="40" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="btnDodajStavku" max="32767" attributes="0"/>
-                                  <Component id="btnObrišiStavku" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="btnDodajStavku" max="32767" attributes="0"/>
+                                      <Component id="btnObrišiStavku" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="btnRacun" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jToolBar1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="jToolBar1" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jScrollPane2" alignment="0" pref="237" max="32767" attributes="0"/>
@@ -149,6 +147,7 @@
                           <Component id="btnObriši" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnPromjeni" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnDodaj" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRacun" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -347,6 +346,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ukupan iznos:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnRacun">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ra&#x10d;un"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRacunActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -6,6 +6,18 @@ package zavrsni.view;
 
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.components.TimePickerSettings;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -147,6 +159,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         jLabel7 = new javax.swing.JLabel();
         btnObrišiStavku = new javax.swing.JButton();
         lblUkupanIznos = new javax.swing.JLabel();
+        btnRacun = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -236,6 +249,13 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
 
         lblUkupanIznos.setText("Ukupan iznos:");
 
+        btnRacun.setText("Račun");
+        btnRacun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRacunActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -275,17 +295,16 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 40, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnDodajStavku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnObrišiStavku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btnDodajStavku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnObrišiStavku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(btnRacun, javax.swing.GroupLayout.Alignment.TRAILING)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
@@ -343,7 +362,8 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnObriši)
                             .addComponent(btnPromjeni)
-                            .addComponent(btnDodaj))))
+                            .addComponent(btnDodaj)
+                            .addComponent(btnRacun))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -365,6 +385,10 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
     }//GEN-LAST:event_lstPodaciValueChanged
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+        if (lstPodaci.getSelectedValue() == null) {
+            return;
+        }
+
         obrada.setEntitet(new Racun());
         popuniModel();
 
@@ -456,7 +480,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         obrada.getEntitet().setStavka(stavke);
 
         try {
-            obrada.update();            
+            obrada.update();
         } catch (MotoException ex) {
         }
 
@@ -476,6 +500,51 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
 
     }//GEN-LAST:event_btnDodajStavkuActionPerformed
 
+    private void btnRacunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRacunActionPerformed
+        BigDecimal zbroj = new BigDecimal(0);
+        if (lstPodaci.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Prvo odaberite račun za ispis!");
+            return;
+        }
+        new File("./racuni").mkdir();
+        Racun n = lstPodaci.getSelectedValue();
+        Document document = new Document() {
+        };
+        try {
+            File file = new File("./racuni/" + "Broj_Računa " + n.getBrojRacuna() + ".pdf");
+            PdfWriter.getInstance(document, new FileOutputStream(file));
+        } catch (FileNotFoundException | DocumentException ex) {
+
+        }
+        document.open();
+        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+        try {
+            document.add(new Paragraph("Broj računa: " + n.getBrojRacuna(), font));
+            document.add(new Paragraph("Djelatnik: " + n.getDjelatnik(), font));
+            document.add(new Paragraph("Kupac: " + n.getKupac(), font));
+            document.add(new Paragraph("________________________________________"));
+            for (int i = 0; i < n.getStavka().size(); i++) {
+
+                document.add(new Paragraph("" + n.getStavka().get(i) + " "
+                        + n.getStavka().get(i).getProizvod().getCijena() + "€", font));
+                zbroj = zbroj.add(n.getStavka().get(i).getProizvod().getCijena()
+                        .multiply(new BigDecimal(n.getStavka().get(i).getKolicina())));
+            }
+            document.add(new Paragraph("________________________________________"));
+
+            document.add(new Paragraph("Ukupno za platiti: " + zbroj + "€", font));
+
+        } catch (DocumentException ex) {
+        }
+        document.close();
+        try {
+            Desktop.getDesktop().open(new File("racuni"));
+        } catch (IOException ex) {
+        }
+
+
+    }//GEN-LAST:event_btnRacunActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
@@ -484,6 +553,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
     private javax.swing.JButton btnObrišiStavku;
     private javax.swing.JButton btnPretraziKupca;
     private javax.swing.JButton btnPromjeni;
+    private javax.swing.JButton btnRacun;
     private javax.swing.JButton btnTrazi;
     private javax.swing.JComboBox<Djelatnik> cmbDjelatnik;
     private javax.swing.JComboBox<Kupac> cmbKupac;
@@ -576,7 +646,8 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         BigDecimal ukupno = new BigDecimal(0);
 
         for (int i = 0; i < m.size(); i++) {
-            ukupno = ukupno.add(obrada.getEntitet().getStavka().get(i).getProizvod().getCijena());
+            ukupno = ukupno.add(obrada.getEntitet().getStavka().get(i).getProizvod().getCijena()
+                    .multiply(new BigDecimal(obrada.getEntitet().getStavka().get(i).getKolicina())));
         }
 
         lblUkupanIznos.setText("Ukupan iznos: " + ukupno);

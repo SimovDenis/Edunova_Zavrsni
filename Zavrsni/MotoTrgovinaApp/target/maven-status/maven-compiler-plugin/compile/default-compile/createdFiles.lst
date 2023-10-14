@@ -37,6 +37,7 @@ zavrsni\view\ProzorProizvod$5.class
 zavrsni\view\ProzorRacun$7.class
 zavrsni\view\ProzorKupac$4.class
 zavrsni\util\PocetniInsert.class
+zavrsni\view\ProzorRacun$11.class
 zavrsni\view\ProzorRacun$8.class
 zavrsni\view\ProzorRacun.class
 zavrsni\controller\Obrada.class
@@ -70,5 +71,6 @@ zavrsni\model\Djelatnik.class
 zavrsni\controller\ObradaDjelatnik.class
 zavrsni\model\Proizvod.class
 zavrsni\view\MotoViewSucelje.class
+zavrsni\view\ProzorRacun$10.class
 zavrsni\view\Izbornik$6.class
 zavrsni\view\Autorizacija.class
