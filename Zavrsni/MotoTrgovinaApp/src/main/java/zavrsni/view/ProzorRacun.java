@@ -385,10 +385,6 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
     }//GEN-LAST:event_lstPodaciValueChanged
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        if (lstPodaci.getSelectedValue() == null) {
-            return;
-        }
-
         obrada.setEntitet(new Racun());
         popuniModel();
 
@@ -597,9 +593,11 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         LocalDate ld = dtpVrijemeKupovine.datePicker.getDate();
         LocalTime lt = dtpVrijemeKupovine.timePicker.getTime();
 
-        LocalDateTime ldt = LocalDateTime.of(ld, lt);
-
-        e.setVrijemeKupovine(Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant()));
+        try {
+            LocalDateTime ldt = LocalDateTime.of(ld, lt);
+            e.setVrijemeKupovine(Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant()));
+        } catch (Exception ex) {
+        }
 
         e.setNacinPlacanja(txtNacinPlacanja.getText());
 
