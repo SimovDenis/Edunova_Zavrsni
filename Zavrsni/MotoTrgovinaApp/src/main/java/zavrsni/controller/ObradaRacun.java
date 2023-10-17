@@ -43,27 +43,28 @@ public class ObradaRacun extends Obrada<Racun> {
         kontrolaKupac();
         kontrolaDjelatnik();
         kontrolaVrijemeKupovineUnos();
+        kontrolaNacinPlacanja();
     }
 
-    private void kontrolaKupac() {
+    private void kontrolaKupac() throws MotoException {
         if (getEntitet().getKupac() == null || getEntitet().getKupac().getSifra().equals(0)) {
-            getEntitet().setKupac(null);
+            throw new MotoException("Obavezno odabrati kupca");
         }
     }
 
     private void kontrolaVrijemeKupovineUnos() throws MotoException {
-        if (getEntitet().getVrijemeKupovine() == null) {
+        if (entitet.getVrijemeKupovine() == null) {
             return;
         }
 
-        if (getEntitet().getVrijemeKupovine().compareTo(new Date()) < 0) {
+        if (entitet.getVrijemeKupovine().compareTo(new Date()) < 0) {
             throw new MotoException("Datum i vrijeme moraju biti nakon trenutnog datuma i vremena");
         }
     }
 
     private void kontrolaDjelatnik() throws MotoException {
         if (getEntitet().getDjelatnik() == null || getEntitet().getDjelatnik().getSifra().equals(0)) {
-            getEntitet().setDjelatnik(null);
+            throw new MotoException("Obavezno odabrati djelatnika");
         }
     }
 
@@ -73,6 +74,7 @@ public class ObradaRacun extends Obrada<Racun> {
         kontrolaKupac();
         kontrolaDjelatnik();
         kontrolaVrijemeKupovinePromjena();
+        kontrolaNacinPlacanja();
     }
 
     private void kontrolaVrijemeKupovinePromjena() throws MotoException {
@@ -102,6 +104,19 @@ public class ObradaRacun extends Obrada<Racun> {
         if (!Character.isLetter(ch[0]) && !Character.isDigit(ch[0])) {
             throw new MotoException("Broj računa mora početi sa brojem ili slovom");
         }
+    }
+
+    private void kontrolaNacinPlacanja() throws MotoException {
+        String s = entitet.getNacinPlacanja().trim();
+
+        if (s == null) {
+            throw new MotoException("Način plaćanja mora biti definiran");
+        }
+
+        if (s.isEmpty()) {
+            throw new MotoException("Polje način plaćanja ne smije biti prazno");
+        }
+
     }
 
 }
