@@ -199,7 +199,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblVrstaPrikaza">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Prikazani su 20 zadnje unesenih kupaca"/>
+        <Property name="text" type="java.lang.String" value="Lista svih kupaca"/>
       </Properties>
     </Component>
   </SubComponents>

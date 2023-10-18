@@ -515,7 +515,9 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
         try {
+            document.addTitle("MOTO TRGOVINA - Route 66");
             document.add(new Paragraph("Broj računa: " + n.getBrojRacuna(), font));
+            document.add(new Paragraph("Vrijeme kupovine: " + n.getVrijemeKupovine(), font));
             document.add(new Paragraph("Djelatnik: " + n.getDjelatnik(), font));
             document.add(new Paragraph("Kupac: " + n.getKupac(), font));
             document.add(new Paragraph("________________________________________"));

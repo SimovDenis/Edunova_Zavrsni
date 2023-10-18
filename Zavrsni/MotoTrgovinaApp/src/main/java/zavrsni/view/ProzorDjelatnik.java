@@ -104,7 +104,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements MotoViewSucel
         jToolBar1.setRollover(true);
         jToolBar1.add(lblOper);
 
-        lblVrstaPrikaza.setText("Prikazani su 20 zadnje unesenih djelatnika");
+        lblVrstaPrikaza.setText("Prikazani su svi uneseni djelatnici");
 
         txtUvjet.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

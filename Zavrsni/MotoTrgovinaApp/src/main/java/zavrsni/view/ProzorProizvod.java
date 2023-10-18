@@ -127,7 +127,7 @@ public class ProzorProizvod extends javax.swing.JFrame {
             }
         });
 
-        lblVrstaPrikaza.setText("Prikazani su 20 zadnje unesenih proizvoda");
+        lblVrstaPrikaza.setText("Prikazani su svi proizvodi");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

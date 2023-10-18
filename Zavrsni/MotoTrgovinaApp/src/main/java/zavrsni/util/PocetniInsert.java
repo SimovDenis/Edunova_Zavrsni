@@ -22,7 +22,7 @@ import zavrsni.model.Stavka;
 public class PocetniInsert {
 
     private static final int BROJ_DJELATNIKA = 8;
-    private static final int BROJ_KUPACA = 200;
+    private static final int BROJ_KUPACA = 80;
     private static final int BROJ_PROIZVODA = 600;
     private static final int BROJ_RACUNA = 100;
     private static final int BROJ_STAVKI = 2000;
@@ -84,7 +84,7 @@ public class PocetniInsert {
         Racun r;
         for (int i = 0; i < BROJ_RACUNA; i++) {
             r = new Racun();
-            r.setBrojRacuna(faker.business().creditCardNumber());
+            r.setBrojRacuna(faker.number().numberBetween(100, 900) + "-" + faker.number().numberBetween(2019, 2024));
             r.setNacinPlacanja(faker.currency().name());
             r.setVrijemeKupovine(faker.date().birthday(0, 3));
             r.setDjelatnik(djelatnici.get(faker.number().numberBetween(0, BROJ_DJELATNIKA - 1)));
@@ -107,11 +107,11 @@ public class PocetniInsert {
     }
 
     private void kreirajProizvode() {
-        Proizvod p;
+        Proizvod p;        
         for (int i = 0; i < BROJ_PROIZVODA; i++) {
             p = new Proizvod();
             p.setNaziv(faker.pokemon().name());
-            p.setCijena(new BigDecimal(faker.number().numberBetween(10, 12000)));
+            p.setCijena(new BigDecimal(faker.number().numberBetween(10, 5000)));
             p.setGarancija(faker.number().numberBetween(0, 20));
             session.persist(p);
             proizvodi.add(p);

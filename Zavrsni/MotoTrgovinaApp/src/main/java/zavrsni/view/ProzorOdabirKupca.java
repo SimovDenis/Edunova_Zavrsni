@@ -106,7 +106,7 @@ public class ProzorOdabirKupca extends javax.swing.JFrame implements MotoViewSuc
             }
         });
 
-        lblVrstaPrikaza.setText("Prikazani su 20 zadnje unesenih kupaca");
+        lblVrstaPrikaza.setText("Lista svih kupaca");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

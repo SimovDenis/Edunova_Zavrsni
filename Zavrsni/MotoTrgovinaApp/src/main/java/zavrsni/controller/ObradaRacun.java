@@ -104,6 +104,17 @@ public class ObradaRacun extends Obrada<Racun> {
         if (!Character.isLetter(ch[0]) && !Character.isDigit(ch[0])) {
             throw new MotoException("Broj računa mora početi sa brojem ili slovom");
         }
+        
+        List<Racun> lista = session.createQuery("from Racun d where d.brojRacuna =:uvjet and "
+                + "d.sifra !=:sifra", Racun.class)
+                .setParameter("uvjet", entitet.getBrojRacuna())
+                .setParameter("sifra", entitet.getSifra() == null ? 0 : entitet.getSifra())
+                .list();
+
+        if (lista != null && !lista.isEmpty()) {
+            throw new MotoException("Broj računa je zauzet!");
+        }
+        
     }
 
     private void kontrolaNacinPlacanja() throws MotoException {

@@ -230,7 +230,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="lblVrstaPrikaza">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Prikazani su 20 zadnje unesenih djelatnika"/>
+        <Property name="text" type="java.lang.String" value="Prikazani su svi uneseni djelatnici"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUvjet">

@@ -51,8 +51,8 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
         kontrolaIme();
         kontrolaPrezime();
         kontrolaBrojUgovora();
-        kontrolaKontakt();
         kontrolaIBAN();
+        kontrolaKontakt();
     }
 
     @Override
@@ -165,7 +165,7 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
     }
 
     private void kontrolaIBAN() throws MotoException {
-        String s = entitet.getIban();
+        String s = entitet.getIban().trim();
 
         if (s == null) {
             throw new MotoException("IBAN djelatnika mora biti definiran");
