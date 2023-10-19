@@ -395,6 +395,9 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         } catch (MotoException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getMessage());
         }
+        
+        
+        
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnObrišiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrišiActionPerformed
@@ -439,11 +442,6 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
     }//GEN-LAST:event_btnPromjeniActionPerformed
 
     private void btnPretraziKupcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziKupcaActionPerformed
-        if (lstPodaci.getSelectedValue() == null) {
-            JOptionPane.showMessageDialog(getRootPane(), "Obavezno odabrati račun te ga preurediti po želji");
-            return;
-        }
-
         new ProzorOdabirKupca(this).setVisible(true);
     }//GEN-LAST:event_btnPretraziKupcaActionPerformed
 
@@ -489,6 +487,7 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
 
     private void btnDodajStavkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajStavkuActionPerformed
         if (lstPodaci.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(getRootPane(), "Potrebno je odabrati račun za dodavanje stavki");
             return;
         }
 
@@ -653,4 +652,9 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         lblUkupanIznos.setText("Ukupan iznos: " + ukupno);
 
     }
+
+    public void postaviKupca(Kupac k) {
+        cmbKupac.setSelectedItem(k);
+    }
+
 }

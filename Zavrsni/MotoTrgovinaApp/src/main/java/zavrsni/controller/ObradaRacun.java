@@ -53,8 +53,8 @@ public class ObradaRacun extends Obrada<Racun> {
     }
 
     private void kontrolaVrijemeKupovineUnos() throws MotoException {
-        if (entitet.getVrijemeKupovine() == null) {
-            return;
+        if (getEntitet().getVrijemeKupovine() == null) {
+            throw new MotoException("Datum i vrijeme moraju biti postavljeni");
         }
 
         if (entitet.getVrijemeKupovine().compareTo(new Date()) < 0) {

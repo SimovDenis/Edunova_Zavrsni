@@ -195,15 +195,7 @@ public class ProzorOdabirKupca extends javax.swing.JFrame implements MotoViewSuc
 
         var k = lstPodaci.getSelectedValue();
 
-        prozorRacun.getObradaRacun().getEntitet().setKupac(k);
-
-        try {
-            prozorRacun.getObradaRacun().update();
-        } catch (MotoException ex) {
-
-        }
-
-        prozorRacun.popuniView();
+        prozorRacun.postaviKupca(k);
 
         dispose();
 
