@@ -17,6 +17,7 @@ zavrsni\model\Stavka.class
 zavrsni\Start.class
 zavrsni\controller\ObradaProizvod.class
 zavrsni\controller\ObradaOperater.class
+zavrsni\view\ProzorRacun$12.class
 zavrsni\view\ProzorOdabirStavke$5.class
 zavrsni\view\ProzorDjelatnik$2.class
 zavrsni\view\Izbornik$5.class
