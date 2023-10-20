@@ -413,14 +413,13 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         }
 
         obrada.setEntitet(e);
-        
 
         try {
             obrada.delete();
             ucitaj();
         } catch (MotoException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
-            
+
         }
     }//GEN-LAST:event_btnObrišiActionPerformed
 
@@ -465,25 +464,19 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
             return;
         }
 
+        var e = lstProizvodiNaRacunu.getSelectedValue();
+
+        obradaStavka.setEntitet(e);
+
+        try {
+            obradaStavka.delete();
+        } catch (Exception ex) {
+        }
+
         DefaultListModel<Stavka> m = (DefaultListModel<Stavka>) lstProizvodiNaRacunu.getModel();
         m.removeElementAt(lstProizvodiNaRacunu.getSelectedIndex());
 
-        List<Stavka> stavke = new ArrayList<>();
-        for (int i = 0; i < m.size(); i++) {
-            stavke.add(m.get(i));
-        }
-
-        obrada.getEntitet().setStavka(stavke);
-
-        try {
-            obrada.update();
-        } catch (MotoException ex) {
-        }
-
-        popuniView();
-        lstProizvodiNaRacunu.repaint();
-
-        btnTraziActionPerformed(null);
+        obrada.refresh();
 
     }//GEN-LAST:event_btnObrišiStavkuActionPerformed
 
