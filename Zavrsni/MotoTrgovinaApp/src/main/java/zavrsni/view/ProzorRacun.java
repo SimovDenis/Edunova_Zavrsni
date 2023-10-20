@@ -392,12 +392,12 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
             obrada.create();
             obrada.refresh();
             ucitaj();
+            lstPodaci.setSelectedIndex(0);
         } catch (MotoException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getMessage());
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnObrišiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrišiActionPerformed
@@ -413,12 +413,14 @@ public class ProzorRacun extends javax.swing.JFrame implements MotoViewSucelje {
         }
 
         obrada.setEntitet(e);
+        
 
         try {
             obrada.delete();
             ucitaj();
         } catch (MotoException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+            
         }
     }//GEN-LAST:event_btnObrišiActionPerformed
 

@@ -18,7 +18,7 @@ public class ObradaRacun extends Obrada<Racun> {
 
     @Override
     public List<Racun> read() {
-        return session.createQuery("from Racun", Racun.class).list();
+        return session.createQuery("from Racun r order by r.sifra desc", Racun.class).list();
     }
 
     public List<Racun> read(String uvjet) {
