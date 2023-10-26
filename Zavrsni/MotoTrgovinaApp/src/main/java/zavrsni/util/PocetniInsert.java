@@ -33,7 +33,7 @@ public class PocetniInsert {
     private List<Kupac> kupci;
     private List<Stavka> stavke;
     private List<Proizvod> proizvodi;
-    private List<Racun> racuni;    
+    private List<Racun> racuni;
 
     public PocetniInsert() {
         faker = new Faker();
@@ -42,13 +42,13 @@ public class PocetniInsert {
         kupci = new ArrayList<>();
         proizvodi = new ArrayList<>();
         racuni = new ArrayList<>();
-        stavke = new ArrayList<>();        
+        stavke = new ArrayList<>();
         session.getTransaction().begin();
         kreirajDjelatnike();
         kreirajKupce();
         kreirajProizvode();
         kreirajRacune();
-        kreirajStavke();                           
+        kreirajStavke();
         session.getTransaction().commit();
         lozinka();
     }
@@ -107,7 +107,7 @@ public class PocetniInsert {
     }
 
     private void kreirajProizvode() {
-        Proizvod p;        
+        Proizvod p;
         for (int i = 0; i < BROJ_PROIZVODA; i++) {
             p = new Proizvod();
             p.setNaziv(faker.pokemon().name());
@@ -117,7 +117,7 @@ public class PocetniInsert {
             proizvodi.add(p);
         }
     }
-    
+
     private void lozinka() {
         Argon2 argon2 = Argon2Factory.create();
 

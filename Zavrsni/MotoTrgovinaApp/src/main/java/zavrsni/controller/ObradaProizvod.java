@@ -20,14 +20,14 @@ public class ObradaProizvod extends Obrada<Proizvod> {
 
     @Override
     public List<Proizvod> read() {
-        return session.createQuery("from Proizvod k order by k.sifra desc", Proizvod.class)                
+        return session.createQuery("from Proizvod k order by k.sifra desc", Proizvod.class)
                 .list();
     }
-    
+
     public List<Proizvod> read(String uvjet) {
         return read(uvjet, 20);
     }
-    
+
     public List<Proizvod> read(String uvjet, int brojRezultata) {
         uvjet = uvjet == null ? "" : uvjet;
         uvjet = uvjet.trim();

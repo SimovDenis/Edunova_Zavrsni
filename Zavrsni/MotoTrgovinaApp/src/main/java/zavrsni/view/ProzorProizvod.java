@@ -210,7 +210,7 @@ public class ProzorProizvod extends javax.swing.JFrame {
         lstPodaci.setModel(m);
         lstPodaci.repaint();
 
-        lblVrstaPrikaza.setText("Prikazani su rezultati pretraživanja");                
+        lblVrstaPrikaza.setText("Prikazani su rezultati pretraživanja");
     }//GEN-LAST:event_btnTraziActionPerformed
 
     private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
@@ -226,7 +226,7 @@ public class ProzorProizvod extends javax.swing.JFrame {
     }//GEN-LAST:event_lstPodaciValueChanged
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        
+
         obrada.setEntitet(new Proizvod());
         popuniModel();
 

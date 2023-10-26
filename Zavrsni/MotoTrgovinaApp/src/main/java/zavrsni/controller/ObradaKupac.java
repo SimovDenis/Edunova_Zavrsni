@@ -39,7 +39,7 @@ public class ObradaKupac extends Obrada<Kupac> {
 
         return lista;
     }
-    
+
     public Kupac readBySifra(int sifra) {
         return session.get(Kupac.class, sifra);
     }

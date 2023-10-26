@@ -83,7 +83,7 @@ public class Djelatnik extends Entitet {
         sb.append(getPrezime());
         sb.append(" ");
         sb.append(getIme());
-        
+
         return sb.toString();
     }
 

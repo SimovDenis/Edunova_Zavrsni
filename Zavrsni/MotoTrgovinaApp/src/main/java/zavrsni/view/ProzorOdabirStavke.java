@@ -192,7 +192,7 @@ public class ProzorOdabirStavke extends javax.swing.JFrame implements MotoViewSu
         try {
             obrada.create();
             obrada.refresh();
-        } catch (MotoException ex) {            
+        } catch (MotoException ex) {
         }
 
         prozorRacun.getObradaRacun().refresh();
